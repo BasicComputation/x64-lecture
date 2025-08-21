@@ -12,8 +12,8 @@ There are several options:
   https://learn.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-170 <br>
   
   Functions for input/output in the C library uses functions from kernel32.dll.<br>
-  Output: puts, putc, printf (are not implemented as is any more) <br>
-  Input: gets (need to use gets_s instead), getc, scanf <br>
+  Output: puts, putc, printf (printf are not implemented as is any more) <br>
+  Input: gets (need to use gets_s instead), getc, scanf (scanf are not implemented as is any more) <br>
   
   C library functions for input and output are also documented for example here: <br>
   https://cplusplus.com/reference/cstdio/ <br>
