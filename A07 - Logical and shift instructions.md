@@ -25,7 +25,7 @@ Shifting 1 to the right, can be seen as halving the value.
 
 
 - SHL - shift left. Move bits to the left by a number of times. <br>
-Zero's is inserted from the left, and bits to the right are discarded.
+Zero's are inserted from the right, and bits to the left are discarded.
 Except the last bit out, is stored in the carry flag.  
 - SHR - shift right. <br>
 Opposite as shift left. Last bit shifted out is stored in the carry flag.
@@ -53,3 +53,6 @@ sar al, cl        ; al will be 11111000 (-8), so -128/(2*2*2*2)
 Bit operations and shifts can be used in many different way. <br>
 When you know C/C++ language you can check out this site: <br>
 Bit Twiddling Hacks - https://graphics.stanford.edu/~seander/bithacks.html
+
+There is also rotate instructions:<br>
+ROL, ROR, RCL, RCR
