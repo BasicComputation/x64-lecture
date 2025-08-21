@@ -28,7 +28,7 @@ Numbers can be very large or small. Cannot represent all possible numbers accura
 ### SIMD - Single Instruction Multiple Data
 In x64, the unit for floating point operations can hold and perform operations on two sets of 4/8/16 floats or 2/4/8 doubles at once.
 There are up to 16 or 32 registers for floating point values. Each of these are up to 256 or 512 bits wide. <br>
-When refering to the 128 bit porion the register is xmm, when refering to 256 bit portion its ymm, if 512 bits its zmm. <br> 
+When refering to the 128 bit portion of a the register, it is xmm, when refering to 256 bit portion its ymm, if 512 bits its zmm. <br> 
 
 Integer operations are also supported on several bytes, word or dwords at the same time. <br>
 There are all kinds of special operations, like add with saturation, so when adding bytes the result will not exceed the value 255.
