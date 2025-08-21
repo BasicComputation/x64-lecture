@@ -176,5 +176,12 @@ these functions invoke an invalid parameter handler, as described in Parameter v
 If execution is allowed to continue, these functions return NULL and set errno to ERANGE."
 
 All this means that if the buffer is to small, or you provide the value 0 as length, a software fault will be induced by <br>
-gets_s function, thereby terminating the application. So if you don't want that to occure, you have to provide <br>
-error handling routine. Error handling is for another time.
+gets_s function, thereby terminating the application. You can provide error handling routine, <br>
+but it does not allow anything useful.
+
+### Conclusion
+avoid gets_s. I just chose this function for the simplicity of use. <br>
+Normally when programming (in C++) you will use more useful functions/methods associated with the objects cout and cin, <br> 
+along with a string object for storing input. <br>
+
+But eventually all input and output has to go through ntdll.dll or kernel32.dll <br>
