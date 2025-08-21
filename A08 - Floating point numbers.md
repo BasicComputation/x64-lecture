@@ -13,7 +13,7 @@ In a float the exponent is 8 bits, fractions are 23 bits, fraction is called sig
 
 First bit in mantissa represent when set, ½, next is ¼, and next 1/8, next 1/16… <br>
 That is 2^-1, 2^-2, 2^-3 and so on. <br>
-The number 1 is added to the mantissa by the CPU, so if mantissa is 0.5 it is actually 1.5 <br>
+The number 1 is added to the mantissa, so if mantissa is 0.5 it is actually 1.5 <br>
 The exponent bits is a unsigned number, in a float that number is subtracted by the CPU with 127 to get the exponent.
 
 ### Example
