@@ -7,7 +7,7 @@ There are two sizes for floating point numbers: <br>
 Single precision floating point (32 bits) and double precision floating point (64 bits) <br>
 Or just ‘float’ and ‘double’
 
-###  Encoding
+##  Encoding
 One bit tells whether the number is positive or negative. <br>
 In a float the exponent is 8 bits, fractions are 23 bits, fraction is called significant or mantissa.
 
@@ -23,9 +23,16 @@ If resulting exponent is 4, and mantissa is 110100000.... then to calculate the 
 if resulting exponent is -2, and mantissa is 101000.... then to calculate the value: <br>
 (1 + 2^-1 + 2^-3) * 2^-2 = 2^(0-2) + 2^(-1-2) + 2^(-3-2) = 0.25 + 0.125 + 0.03125 = 0.40625
 
-Numbers can be very large or small. Cannot represent all possible numbers accuratly because of the fractions used.
+Numbers can be very large or small. Cannot represent all possible numbers accuratly because of the fractions used. <br>
+Special cases: 
+- infinity - the sign bit is set to 0 for positive infinity and 1 for negative infinity,<br>
+  the exponent field is all ones, and the mantissa (or fraction) is all zeros.
+- NAN - (Not A Number) Result is undefined. There is quite NAN and signaling NAN
+- Denormalized - These are very small numbers, smaller than the smallest normalized number. <br>
+  They are represented with a special exponent (all 0 bits) but a non-zero fraction
+- Zero - all bits are 0, except the sign bit, can be set, giving 0 and -0.
 
-### SIMD - Single Instruction Multiple Data
+## SIMD - Single Instruction Multiple Data
 In x64, the unit for floating point operations can hold and perform operations on two sets of 4/8/16 floats or 2/4/8 doubles at once.
 There are up to 16 or 32 registers for floating point values. Each of these are up to 256 or 512 bits wide. <br>
 When refering to the 128 bit portion of a the register, it is xmm, when refering to 256 bit portion its ymm, if 512 bits its zmm. <br> 
@@ -33,7 +40,7 @@ When refering to the 128 bit portion of a the register, it is xmm, when refering
 Integer operations are also supported on several bytes, word or dwords at the same time. <br>
 There are all kinds of special operations, like add with saturation, so when adding bytes the result will not exceed the value 255.
 
-### In assembly
+## In assembly
 ```asm
 mov eax, 1000
 cvtsi2ss xmm0, eax    ; convert the value in eax to a float, store it in the lower 32 bit of 128 bit register xmm0
@@ -50,6 +57,6 @@ addpd xmm2, xmm3      ; add packed double
                       ; a0 = a0 + b0 and a1 = a1 + b1
 ```
 
-### Documentation
+## Documentation
 Instructions for the SSE unit are documented in volume 4 chapter 2 of the AMD manual. <br>
 For introduction and overview over this part of the CPU see volume 1 chapter 4
