@@ -13,7 +13,7 @@ This is not good, so data should be aligned in memory, that is not to cross the 
 In practice, double word (32 bit) is stored at a addresses where the first two bits in the address are 0. <br> 
 With a word (16 bits) the first bit in address is 0.
 
-When writing to RAM, for example a byte, all the 64 bits has to be read first and then the 8 bits has to be modified, and the written back. 
-I believe...
+When writing to RAM, for example a byte, all the 64 bits has to be read first and then the 8 bits has to be modified, and the written back. <br>
+Perhaps the control logic of RAM is doing that, not the CPU.
 
 Next up, cache memory.
