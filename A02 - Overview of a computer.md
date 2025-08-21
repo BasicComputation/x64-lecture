@@ -31,7 +31,7 @@ and then sets the instruction pointer to the address of the first instruction in
 The CPU will read from that address and decode the data read as a instruction (fetching the instruction). <br>
 Before executing the instruction, the instruction pointer will be updated to point to the next instruction. <br>
 
-Instructions in x64 is of varying size, can be a single byte <br>
+Instructions in x64 Inel/AMD CPU's is of varying size, can be a single byte <br>
 and as part of the instruction there might be data, for example a offset into memory. <br>
 The raw instructions are called machine instructions, and each of them point into its own table <br>
 inside the CPU that contains all the steps the CPU must do for the particular operation.
