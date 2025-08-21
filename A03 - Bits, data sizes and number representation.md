@@ -25,7 +25,7 @@ The position of the bit determine the value (from right to left): <br>
   then 32, 64, 128, 256, 512, 1024, 2048...
 ```
 So the value doubles for each bit added. <br>
-The binary number 1100 is equal to 4 + 2 = 6
+The binary number 1100 is equal to 8 + 4 = 12
 
 Hexadecimal numbers are numbers with base 16 - 2A3F1007 <br>
 The value 10 is represented by the letter 'A', 11=B 12=C 13=D 14=E 15=F <br>
