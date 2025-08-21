@@ -24,13 +24,15 @@ https://visualstudio.microsoft.com/
 There are many other tools than Visual Studio available for programming: C++ compilers, assemblers, debuggers. <br>
 But Visual Studio contains everything you need.
 
+For documentation and other resources see below.
+
 ## Example
 x64 Assembly (x64 refer to 64 bit AMD and Intel processors)
 ~~~asm
 ; register = memory unit in the CPU
 ; they are often 64 bits in size
 
-mov eax, 10       ; put the value 10 into the 32 bit part of 'A' register 
+mov eax, 10       ; put the value 10 into the 32 bit part of 'A' register
 
 mov bx, [1000]    ; read (32 bits) from address IP + 1000, put the value into the 16 bit part of 'B' register
                   ; IP = instruction pointer register, is 64 bits.
