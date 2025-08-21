@@ -34,8 +34,8 @@ x64 Assembly (x64 refer to 64 bit AMD and Intel processors)
 
 mov eax, 10       ; put the value 10 into the 32 bit part of 'A' register
 
-mov bx, [1000]    ; read (32 bits) from address IP + 1000, put the value into the 16 bit part of 'B' register
-                  ; IP = instruction pointer register, is 64 bits.
+mov bx, [1000]    ; read (16 bits) from address IP + 1000, put the value into the 16 bit part of 'B' register
+                  ; IP = instruction pointer register, its 64 bits.
                   ; It holds the address of the next instruction to be fetched and executed.
 
 mov [rcx], dl     ; write 8 bits, that is hold in 'D' register, into memory.
