@@ -109,10 +109,9 @@ https://cplusplus.com/reference/cstdio/gets/
 gets_s documentation <br>
 https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/gets-s-getws-s?view=msvc-170
 
-gets_s is explained after the code.
-To confirm that data has indeed been stored from the memory location, add call to puts with the address of buffer.
-Next up is about debugging, that is to halt the execution of the program, so you can see the content of CPU and memory
-after a given instruction have executed, and step through one or more instructions or a function at a time.
+gets_s is explained after the code. <br>
+To confirm that data has indeed been stored from the memory location, add call to puts with the address of buffer, <br>
+or inspect memory.
 
 ```asm
 includelib ucrt.lib
