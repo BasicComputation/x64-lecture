@@ -17,9 +17,9 @@ The format contains information about the executable file. <br>
 - And other information and settings, like is it a console or GUI (Graphical User Interface) application.
 
 The operating system setup a memory segment where the format is loaded into, it has read permission. <br>
-It is logical that the operating system then setup memory segments for the sections acording to the information, and then loaded them. <br>
+It is logical that the operating system then setup memory segments for the sections according to the information, and then load them. <br>
 The process of loading DLL files into memory is then started, and addresses of functions are then stored at <br>
-specified locations, according to the information in the executable file.
+specified locations, according to the information in the executable file. 
 
 ### Inspecting a file
 Copy the code below. To create the executable without starting it, go to menu->build->build solution. <br>
