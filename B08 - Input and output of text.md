@@ -37,8 +37,8 @@ puts proto              ; proto is symbol declaration of symbols external to thi
 mainCRTStartup proc     ; 'mainCRTStartup' is name of a offset in memory.
                         ; 'proc' tells that it is a function, and that the symbol is global
 
-	sub rsp, 28h     ; align stack by 16 by subtracting by 8, and reserve 20h of data for shadow store at the same time.
-                     ; 'shadow store' is for functions that is called to save the first 4 arguments:
+	sub rsp, 28h     ; align stack by 16 by subtracting by 8, and reserve 20h of data for shadow space at the same time.
+                     ; 'shadow space' is for functions that is called to save the first 4 arguments:
                      ; rcx, rdx, r8, r9 and or xmm0, xmm1, xmm2, xmm3
 
 	lea rcx, [message]    ; 'message' is found in the .const section
@@ -90,12 +90,6 @@ In the documentation: <br>
 EOF is a negative value, so eax will have that value. <br>
 "error indicator" is, as I understand it, a variable for the C library that is set to signal a error has occured, <br>
 it resides in a data segment belonging to the DLL.
-
-### Calling convention - argument passing
-First arguments to functions is by convention in Windows put in the 'C' register, then 'D', then '8' and then '9'. <br>
-Any more arguments are provided in the stack of the calling functions, so room for arguments needs to be reserved. <br>
-I will explain the calling convention for Windows later on.
-
 
 ## Getting input
 In this example I will use the C library function "gets" to get a string of characters. <br>
