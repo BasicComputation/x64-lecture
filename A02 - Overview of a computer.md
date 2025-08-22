@@ -2,7 +2,7 @@
 The CPU (Central Processing Unit), is connected to graphics card, harddisc controller, USB controller, others, and of course main memory, called RAM (Random Access Memory). <br>
 
 The CPU is connected to the other parts via a data bus (64 bit), address bus (might be 48 bit), and a control bus. <br>
-*(a bit holds the value 0 or 1, that is voltage on or off in a wire or memory cell. Several bits are processed in parallel in a computer)*
+*(a bit holds the value 0 or 1, that is voltage off or on in a wire or memory cell. Several bits are processed in parallel in a computer)*
 
 - The address bus select which location to read from or write to. <br>
 - The control bus selects if to read or write, and pass signals. <br>
