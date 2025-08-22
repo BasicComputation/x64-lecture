@@ -1,29 +1,5 @@
 # Debugging
-Here I teach you basic debugging in Visual Studio. Copy the first piece of code below and lets get started. <br>
-
-To debug you must specify where the program shall halt, in the source code at the leftmost side, press to insert a breakpoint. <br>
-You can have as many as you want. <br>
-<img width="662" height="67" alt="image" src="https://github.com/user-attachments/assets/2bc0559d-bc6b-4217-a960-241e80fb29af" /> <br>
-
-### Instructions
-Make shure you select Release, not Debug, and press green arrow "Local Windows Debugger". <br>
-The application is built and started in debug mode. You can see a yellow arrow at the left side over the breakpoint, that is where the execution is halted. <br>
-1. Now I want you to go to menu->Debug->Windows and select "Registers". <br>
-   This give the current values in the registers. Right click in the window and select flags. <br>
-   You can move this window around and resize it. By dragging it to the sides you can dock it where you want. <br>
-2. Go to menu->debug->Windows->memory, select one of them. Arrange the windows to your liking. <br>
-   In menu of memory window you see "Address", here you can type or paste in an address.<br>
-   Also in "columns" select 16, so there are 16 bytes per row.<br>
-3. Go to menu->debug, there you see step into (F11), step over (F10).<br>
-  To step through, that is execute, a single instruction, press F11 key. <br>
-  The value in register R8 is now colored red, that means the value is different than what it was. <br>
-  So R8 holds now the address of numbers. Copy the value in R8 and paste it into Memory viewer's address, press enter. <br>
-  Right click in Memory and select "4 byte integer", since our data is double words (32 bit / 4 bytes) we now see them arranged correctly. <br>
-  Right click again in Memory and select "Signed Display". So now you the values in decimal as signed numbers, 10 and -3. <br>
-4. Now you can press F11 to step through and see the results in registers. When you get to where the result is stored, <br>
-   notice that where memory has been modified is colored red. So you see -30 stored.
-5. To let the program run to the next breakpoint or end, press the green arrow "continue", or to stop execution press the red square. <br>
-  
+Here I teach you basic debugging in Visual Studio. Copy the code example below and lets get started. <br>
 ```asm
 ; see AMD manual for instruction reference - volume 3 chapter 3
 .code
@@ -60,6 +36,30 @@ mainCRTStartup endp
 
 end
 ```
+
+### Instructions
+To debug you must specify where the program shall halt, in the source code at the leftmost side, press to insert a breakpoint. <br>
+You can have as many as you want. <br>
+<img width="662" height="67" alt="image" src="https://github.com/user-attachments/assets/2bc0559d-bc6b-4217-a960-241e80fb29af" /> <br>
+
+Make shure you select Release, not Debug, and press green arrow "Local Windows Debugger". <br>
+The application is built and started in debug mode. You can see a yellow arrow at the left side over the breakpoint, that is where the execution is halted. <br>
+1. Now I want you to go to menu->Debug->Windows and select "Registers". <br>
+   This give the current values in the registers. Right click in the window and select flags. <br>
+   You can move this window around and resize it. By dragging it to the sides you can dock it where you want. <br>
+2. Go to menu->debug->Windows->memory, select one of them. Arrange the windows to your liking. <br>
+   In menu of memory window you see "Address", here you can type or paste in an address.<br>
+   Also in "columns" select 16, so there are 16 bytes per row.<br>
+3. Go to menu->debug, there you see step into (F11), step over (F10).<br>
+  To step through, that is execute, a single instruction, press F11 key. <br>
+  The value in register R8 is now colored red, that means the value is different than what it was. <br>
+  So R8 holds now the address of numbers. Copy the value in R8 and paste it into Memory viewer's address, press enter. <br>
+  Right click in Memory and select "4 byte integer", since our data is double words (32 bit / 4 bytes) we now see them arranged correctly. <br>
+  Right click again in Memory and select "Signed Display". So now you the values in decimal as signed numbers, 10 and -3. <br>
+4. Now you can press F11 to step through and see the results in registers. When you get to where the result is stored, <br>
+   notice that where memory has been modified is colored red. So you see -30 stored.
+5. To let the program run to the next breakpoint or end, press the green arrow "continue", or to stop execution press the red square. <br>
+  
 ### Note about flags
 AMD manual the flags are named like this: <br>
 Carry – CF | Overflow – OF | Sign – SF | Zero – ZF | Auxiliary – AF | Parity – PF | Direction – DF <br>
