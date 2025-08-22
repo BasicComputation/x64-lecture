@@ -6,6 +6,8 @@ Here I teach you basic debugging in Visual Studio. Copy the code example below a
 
 mainCRTStartup proc
 	lea r8, [numbers]		; get address of data for inspection
+							; LEA = Load Effective Address:
+							; here LEA will take the instructions pointer and add it with the offset to "numbers"
 
 	mov eax, [numbers]		; eax will be 10
 	imul [numbers + 4]		; edx:eax = eax * [number + 4] so edx:eax = eax * -3
