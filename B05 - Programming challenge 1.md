@@ -1,4 +1,4 @@
-# Coding challenge
+# Programming challenge
 The challenge is: convert a string of text containing a number into a 32 bit signed value. <br>
 Must accept "-" sign infront of number.
 
