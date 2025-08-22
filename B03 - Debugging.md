@@ -22,7 +22,7 @@ The application is built and started in debug mode. You can see a yellow arrow a
   Right click again in Memory and select "Signed Display". So now you the values in decimal as signed numbers, 10 and -3. <br>
 4. Now you can press F11 to step through and see the results in registers. When you get to where the result is stored, <br>
    notice that where memory has been modified is colored red. So you see -30 stored.
-5. To let the program run to the next breakpoint, press the green arrow continue, or to stop execution press the red square. <br>
+5. To let the program run to the next breakpoint or end, press the green arrow "continue", or to stop execution press the red square. <br>
   
 ```asm
 ; see AMD manual for instruction reference - volume 3 chapter 3
@@ -33,12 +33,13 @@ mainCRTStartup proc
 
 	mov eax, [numbers]		; eax will be 10
 	imul [numbers + 4]		; edx:eax = eax * [number + 4] so edx:eax = eax * -3
-	
-	jno @f					; IMUL set carry and overflow flag to 1 if the result overflowed
+							; Result is of double size, so upper bits are in stored in 'D' register
+							; IMUL sets carry and overflow flag to 1 if the result overflowed
+	jno @f					; Jump to nearest @@ forward if not overflow 
 	xor eax, eax			; return code = 0
 	ret
 
-@@:	mov [product], eax		; store the result
+@@:	mov [product], eax		; store the result in RAM
 
 	mov eax, 7FFFFFFFh		; maximum positive value
 	mov ebx, 2
