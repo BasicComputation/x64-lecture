@@ -1,6 +1,6 @@
 # Signed and unsigned numbers
 
-In computers there is of course no minus sign you can add to a numbers, <br>
+In computers there is no special minus sign you can add to a number, <br>
 but if you say that the most significant bit (upper bit) in a data size is the negative sign, <br>
 you will see that it works in arithmetic operations.<br>
 Numbers where the most significant bit is considered a sign of negative, is called signed numbers. <br>
