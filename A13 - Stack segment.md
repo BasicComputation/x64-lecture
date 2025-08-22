@@ -23,7 +23,7 @@ This is achieved by subtracting the stack pointer.
 
 Note: the stack pointer should point to address that is aligned by 16 before calling another function. <br>
 Aligned by 16 means that the first 4 bits in a address is 0. <br>
-Floating point instructions often require the data it reads from memory to be align by 16. <br>
+Floating point instructions often require the data it access from memory to be align by 16, or else...<br>
 
 ```asm
 ; How the stack is setup for functions in Windows programs.
@@ -38,18 +38,18 @@ function1:                ; named offset in memory
                           ;   sub rsp, 8
                           ;   mov [rsp], rbp
 
-  sub rsp, 40h            ; make room for 64 bytes. 32 bytes for 'shadow store' and 32 bytes for free use.
+  sub rsp, 40h            ; make room for 64 bytes. 32 bytes for 'shadow space' and 32 bytes for free use.
 
   lea rbp, [rsp + 20h]    ; rbp will point to the beginning of the 32 bytes that are free to use
-                          ; LEA 'Load Effective Address'. LEA can also get the value of IP + a value.
-                          ; rbp = rsp + 20h
+                          ; LEA 'Load Effective Address'
+                          ; rbp = rsp + 20h (LEA can also get the value of IP + a value: lea rax, [address])
 
   ; local variables
-  mov dword [rbp], 1      ; store the 32 bit value 1 into local memory, rbp is here the pointer
+  mov dword ptr [rbp], 1      ; store the 32 bit value 1 into local memory, rbp is here the pointer
                           ; in assembly you must specify the size of the value with byte,word,dword,qword
   mov [rbp + 4], ecx      ; store the 32 bit value in 'C' register at the next position.
                           ; so offset by 4 as the first variable takes up 4 bytes.
-  mov qword [rbp + 8], 3  ; store the 64 bit value 3 
+  mov qword ptr [rbp + 8], 3  ; store the 64 bit value 3 
   mov [rbp + 16], rax     ; store the 64 bit value in 'A' register.
 
   ; arguments for function2
