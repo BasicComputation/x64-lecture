@@ -69,8 +69,8 @@ Microsoft name flags like this:	<br>
 Carry – CY | Overflow – OV | Sign – PL | Zero – ZR | Auxiliary – AC | Parity – PE | Direction – UP
 
 ## More about debugging
-While debugging you can also go to memu->Windows->Disassembly <br>
-There you see the disassembled view of memory, so machine instruction presented in assebmly form. <br>
+While debugging you can also go to menu->Windows->Disassembly <br>
+There you see the disassembled view of memory, so machine instruction presented in assembly form. <br>
 In "Viewing Options":<br>
 - select "Show Code bytes" to see the data of each machine instruction
 - select "Show Source code" to see the source code along with disassembly
@@ -78,7 +78,7 @@ In "Viewing Options":<br>
 - select "Show symbol names" to see the names of addressses in disassembly code
 
 Note that when a instruction read or write data, relative addresses are computated and shown within parentheses. <br>
-You see alot of "add byte ptr [rax],al", that is the disassembled view of data containing two bytes with the value 0.
+You see a lot of "add byte ptr [rax],al", that is the disassembled view of data containing two bytes with the value 0.
 
 ## Multiplication and division examples
 Test out debugging this code if you want to and learn about the different multiplication and division instructions.
