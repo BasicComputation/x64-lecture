@@ -2,7 +2,7 @@
 The heap is another data segment setup by the operating system for an program. 
 
 Windows provides programs/functions that handles request from a program to reserve memory in the heap of a requested size. <br>
-The heap segment is used for smaller memory reservations, if requested memory is too large for the heap segment, new pages are allocated.
+The heap segment is used for smaller memory reservations, if requested memory is too large, new pages are allocated. <br>
 When memory reserved is no longer needed it can be freed for later use, by calling a free function.
 
 The functions that manages the heap uses tables and other methods to keep track of where memory is reserved or free. <br>
