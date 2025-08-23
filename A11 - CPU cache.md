@@ -26,17 +26,17 @@ So read 64 bytes from a adress aligned to a multiple of 1000000b (40h). <br>
 If the cache line is 128 bytes then its from address multiple of 80h.
 
 ### Cache line prefetching
-When you read from memory, the cache will not only get a cache line of data, but also predict where the program will need data from.
+When you read from memory, the cache will not only get a cache line of data, but also predict where the program will need data from. <br>
 So the cache will in the background load in more cache lines, so it will hopefully allready be there at a later point.
 
 ### Writeback
 When cache is full, but it need data from another address, it has to write to RAM an cache line to free it up (evict it). <br>
-The cache keep track of what data is modified by a single bit called the dirty bit, so if not modified it does not have to write into RAM.
+The cache keep track of what data is modified by a single bit called the dirty bit, so if not modified it does not have to write into RAM. <br>
 Which cache line to evict can be determined by hardware, also by special software, it has what is called a writeback policy.
 
 ### Processes sharing address space - shared data
 If two running programs, can be a process or a thread, share the same data / memory, and is running at the same time in different cores,
-and a write occures in the shared memory, the data will be marked by the cache as invalid (in the L3 cache), as it holds a copy of a cores L2 cache.
+and a write occures in the shared memory, the data will be marked by the cache as invalid in the L3 cache, as it holds a copy of a cores L2 cache.
 So if the other process or thread want to read from there afterwards, the L1 and L2 cache of that core needs to be updated with what is in L3. <br>
 
 I might have gotten some of the details here wrong.
