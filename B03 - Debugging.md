@@ -10,7 +10,8 @@ mainCRTStartup proc
 							; here LEA will take the instructions pointer and add it with the offset to "numbers"
 
 	mov eax, [numbers]		; eax will be 10
-	imul [numbers + 4]		; edx:eax = eax * [number + 4] so edx:eax = eax * -3
+	imul [numbers + 4]		; IMUL is signed multiplication
+							; edx:eax = eax * [number + 4] so edx:eax = eax * -3
 							; Result is of double size, so upper bits are in stored in 'D' register
 							; IMUL sets carry and overflow flag to 1 if the result overflowed
 	jno @f					; Jump to nearest @@ forward if not overflow 
@@ -53,14 +54,15 @@ The application is built and started in debug mode. You can see a yellow arrow a
    In menu of memory window you see "Address", here you can type or paste in an address.<br>
    Also in "columns" select 16, so there are 16 bytes per row.<br>
 3. Go to menu->debug, there you see step into (F11), step over (F10).<br>
-  To step through, that is execute, a single instruction, press F11 key. <br>
-  The value in register R8 is now colored red, that means the value is different than what it was. <br>
-  So R8 holds now the address of numbers. Copy the value in R8 and paste it into Memory viewer's address, press enter. <br>
+	"step over" is to execute a single instruction and also a whole function call. <br>
+	"step through" is to execute a single instruction, do press F11. <br>
+ The value in register R8 is now colored red, that means the value is different than what it was. <br>
+4. So R8 holds now the address of numbers. Copy the value in R8 and paste it into Memory viewer's address, press enter. <br>
   Right click in Memory and select "4 byte integer", since our data is double words (32 bit / 4 bytes) we now see them arranged correctly. <br>
   Right click again in Memory and select "Signed Display". So now you the values in decimal as signed numbers, 10 and -3. <br>
-4. Now you can press F11 to step through and see the results in registers. When you get to where the result is stored, <br>
+5. Now you can press F11 to step through and see the results in registers. When you get to where the result is stored, <br>
    notice that where memory has been modified is colored red. So you see -30 stored.
-5. To let the program run to the next breakpoint or end, press the green arrow "continue", or to stop execution press the red square. <br>
+6. To let the program run to the next breakpoint or to the end, press the green arrow "continue", or to stop execution press the red square. <br>
   
 ### Note about flags
 AMD manual the flags are named like this: <br>
