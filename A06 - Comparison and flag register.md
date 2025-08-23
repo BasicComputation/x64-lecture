@@ -10,7 +10,7 @@ In the flag register there are 4 flags of interest:
 - zero flag (ZF) - is the resulting number zero ?
 - sign flag (SF) - is the resulting number negative ?
 
-### Comparison and condition instructions
+### Comparison
 Comparing two numbers are done by subtracting the two without storing the result. <br>
 The flags are set or cleared, and from the flags (and the sign of the numbers compared), <br>
 the relation of the first number to the second number can be determined to be: <br>
@@ -23,7 +23,7 @@ the relation of the first number to the second number can be determined to be: <
 ### Conditional instructions and condition codes
 cc = condition code
 - Jcc - jump if condition is true (only relative to the instruction pointer)
-- CMOVcc - 'Conditional mov', mov if condition is true (mov only into register, not 8 bit)
+- CMOVcc - conditional move, move if condition is true (move only into register, not 8 bit)
 - SETcc - set byte to 1 if condition is true, set to 0 otherwise
 
 The conditions are
@@ -44,7 +44,7 @@ So AE is above or equal for example.
 
 ### Example
 ```asm
-  cmp ax, bx      ; compare the 16 bit portions of 'A' register, with 'B'
+  cmp ax, bx      ; compare the 16 bit portions of 'A' register and 'B'
   jne -10         ; jump if not equal to IP + (-10)
   cmova ax, bx    ; copy bx into ax if above. So ax = bx if ax < bx
   setc cl         ; set 8 bit portion of 'C' register to 1 if carry flag is set, 0 otherwise.
