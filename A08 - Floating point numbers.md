@@ -18,10 +18,10 @@ The exponent bits is a unsigned number, in a float that number is subtracted by 
 
 ### Example
 If resulting exponent is 4, and mantissa is 110100000.... then to calculate the value: <br>
-(1 + 2^-1 + 2^-2 + 2^-4) * 2^4 = 2^(0+4) + 2^(-1+4) + 2^(-2+4) + 2^(-4+4)+= 16 + 8 + 4 + 1 = 29
+(2^0 + 2^-1 + 2^-2 + 2^-4) * 2^4 = 2^(0+4) + 2^(-1+4) + 2^(-2+4) + 2^(-4+4)+= 16 + 8 + 4 + 1 = 29
 
 if resulting exponent is -2, and mantissa is 101000.... then to calculate the value: <br>
-(1 + 2^-1 + 2^-3) * 2^-2 = 2^(0-2) + 2^(-1-2) + 2^(-3-2) = 0.25 + 0.125 + 0.03125 = 0.40625
+(2^0 + 2^-1 + 2^-3) * 2^-2 = 2^(0-2) + 2^(-1-2) + 2^(-3-2) = 0.25 + 0.125 + 0.03125 = 0.40625
 
 Numbers can be very large or small. Cannot represent all possible numbers accuratly because of the fractions used. <br>
 Special cases: 
@@ -33,11 +33,11 @@ Special cases:
 - Zero - all bits are 0, except the sign bit, can be set, giving 0 and -0.
 
 ## SIMD - Single Instruction Multiple Data
-In x64, the unit for floating point operations can hold and perform operations on two sets of 4/8/16 floats or 2/4/8 doubles at once.
+In x64, the unit for floating point operations can hold 4/8/16 floats or 2/4/8 doubles per register, and perform operations on two sets of floats or doubles at once.
 There are up to 16 or 32 registers for floating point values. Each of these are up to 256 or 512 bits wide. <br>
-When refering to the 128 bit portion of a the register, it is xmm, when refering to 256 bit portion its ymm, if 512 bits its zmm. <br> 
+When refering to the 128 bit portion of the register, it is xmm, when refering to 256 bit portion its ymm, if 512 bits its zmm. <br> 
 
-Integer operations are also supported on several bytes, word or dwords at the same time. <br>
+Integer operations are also supported, on several bytes, word or dwords at the same time. <br>
 There are all kinds of special operations, like add with saturation, so when adding bytes the result will not exceed the value 255.
 
 ## In assembly
