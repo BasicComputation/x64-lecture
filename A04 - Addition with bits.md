@@ -1,7 +1,7 @@
 # Addition with bits
 Two binary numbers can be added together, but in a computer they have to be of the same size, <br>
-and the result will be of the same size. Surplus bit of result is discarded, but as I will get into later, <br>
-that surplus bit sets a bit in a register in the CPU called the flag register (registers is memory in the CPU). <br>
+and the result will be of the same size. Surplus bit of result is discarded. <br>
+The discarded bit sets a bit in a register in the CPU called the flag register. <br>
 Individual bits in the flags register is called a flag. The flag in question is called the carry flag.
 
 Addition with bits is the same procedure as with decimal numbers, two corresponding bits with value 1 added toghether <br>
