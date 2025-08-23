@@ -1,6 +1,5 @@
 # Programming challenge
 The challenge is: convert a string of text containing a number into a 32 bit signed value. <br>
-Must accept "-" sign infront of number.
 
 Each character has a value, the numbers 0 to 9 are in sequence: <br>
 0 = 30h 1 = 31h 2 = 32h ... 9 = 39h
