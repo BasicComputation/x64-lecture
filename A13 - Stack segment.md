@@ -42,10 +42,10 @@ function1:                ; named offset in memory
 
   lea rbp, [rsp + 20h]    ; rbp will point to the beginning of the 32 bytes that are free to use
                           ; LEA 'Load Effective Address'
-                          ; rbp = rsp + 20h (LEA can also get the value of IP + a value: lea rax, [address])
+                          ; rbp = rsp + 20h (LEA can also get the value of IP + a value: lea rax, [offset])
 
   ; local variables
-  mov dword ptr [rbp], 1      ; store the 32 bit value 1 into local memory, rbp is here the pointer
+  mov dword ptr [rbp], 1  ; store the 32 bit value 1 into local memory, rbp is here the pointer
                           ; in assembly you must specify the size of the value with byte,word,dword,qword
   mov [rbp + 4], ecx      ; store the 32 bit value in 'C' register at the next position.
                           ; so offset by 4 as the first variable takes up 4 bytes.
