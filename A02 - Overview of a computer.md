@@ -1,5 +1,5 @@
-# Basic overview of a computer (64 bit)
-The CPU (Central Processing Unit), is connected to graphics card, harddisc controller, USB controller, others, and of course main memory, called RAM (Random Access Memory). <br>
+# Overview of a computer
+The CPU (Central Processing Unit), is connected to the graphics card, harddisc controller, USB controller, others, and of course main memory, called RAM (Random Access Memory). <br>
 
 The CPU is connected to the other parts via a data bus (64 bit), address bus (might be 48 bit), and a control bus. <br>
 *(a bit holds the value 0 or 1, that is voltage off or on in a wire or memory cell. Several bits are processed in parallel in a computer)*
@@ -10,17 +10,19 @@ For example data is now available in the databus, or the write is completed. <br
 - The data bus pass data/numbers between the CPU and the different parts
 
 The CPU directs everything that goes on in a computer. <br>
-It reads data for processing, and write data to a location for storage, output or for controlling settings. <br>
+It reads data for processing and write data to a location for storage, output or for controlling settings. <br>
 
 ### Addressing RAM
 Each address into RAM points minimum to 8 bits, 8 bits is called a byte. <br>
-So adding 1 to a address will point to the next 8 bits. <br>
+Adding 1 to a address will point to the next 8 bits. <br>
 Actually 64 bits, that is 8 bytes, is read from or written to RAM at once. <br>
 More on RAM and other memory later.
 
 ### DMA - Direct Memory Access controller
-As said the CPU directs everything, if you for example want to load into RAM a file from the harddrive, the CPU can avoid reading data from the harddrive controller for then to store the data into RAM.
-This is where the DMA comes in, it can be programmed to read from a address and store what is read to another address, and do it in chunks. This leaves time for the CPU to do other work. <br>
+As said the CPU directs everything, if you for example want to load into RAM a file from the harddrive, the CPU can avoid reading data into itself from the harddrive controller,
+for then to store the data into RAM with the DMA.
+The DMA can be programmed to read from an address or sequence of addresses, and store what is read to another address in sequnce, and do it in chunks. <br>
+This leaves time for the CPU to do other work.
 
 ### Instruction fetching and execution
 Inside the CPU there are small memory units called registers, one special register is the 64 bit Instruction Pointer (IP). <br>
