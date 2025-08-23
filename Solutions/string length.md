@@ -106,11 +106,13 @@ strLength_v4 proc
 	
 @1:	test cl, 1Fh		; is address aligned by 32 ?
 	jz @2
-	
+
+	; compare a byte at the time, can be optimized as up to 31 bytes needs to be checked
 	cmp byte ptr [rcx], 0
 	je @f
 	inc rcx
 	jmp @1
+
 @@:	sub rcx, rbx
 	mov eax, ecx
 	ret
@@ -135,9 +137,10 @@ strLength_v5 proc
 	mov edx, 16
 	xor ebx, ebx
 
-@1:	test sil, 0Fh
+@1:	test sil, 0Fh		; aligned by 16 ?
 	jz @2
 
+	; compare a byte at the time, can be optimized as up to 15 bytes needs to be checked
 	cmp byte ptr [rsi], 0
 	je @f
 	inc rsi
