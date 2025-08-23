@@ -1,4 +1,4 @@
-# Introduction to computers and programming
+# Introduction
 If you want to learn programming, you should know a few thing about how a computer works. <br>
 Here you will get insight into how the CPU and memory works, among other thing.<br>
 The programming languages I will teach you are x64 assembly and eventually C++.<br>
@@ -9,15 +9,15 @@ Instruction the CPU reads and execute are called machine instructions. Machine i
 There is for example assembly intructions for addition, subtraction and copy, they have a source and a destination operand. <br>
 For every variation of operands for an assembly instructions, there is a unique machine instruction. <br>
 There are tables inside the CPU for each machine instruction, so a machine instruction point to its table. <br>
-Those tables contains the steps that the CPU must do to perform the operation.
+Those tables contains the steps that the CPU must do to perform a operation.
 
-Some operations: copy, add, subtract, multiply, divide, compare, jumps, bit operations.
+Basic operations: copy, add, subtract, multiply, divide, compare, jumps, bit operations.
 
 Assembly instructions will be converted into machine instructions. <br>
 C++ is higher level code that will be converted into assembly code. <br>
 
 ## You need
-A computer with AMD or Intel CPU. The most common processor types in desktop and laptops.<br>
+A computer with 64 bit AMD or Intel CPU, the most common processor types in desktop and laptops.<br>
 Windows and the programming environment Visual Studio from Microsoft. <br>
 https://visualstudio.microsoft.com/
 
@@ -35,7 +35,7 @@ x64 Assembly (x64 refer to 64 bit AMD and Intel processors)
 mov eax, 10       ; put the value 10 into the 32 bit part of 'A' register
 
 mov bx, [1000]    ; read (16 bits) from address IP + 1000, put the value into the 16 bit part of 'B' register
-                  ; IP = instruction pointer register, its 64 bits.
+                  ; IP = instruction pointer register, it's 64 bits.
                   ; It holds the address of the next instruction to be fetched and executed.
 
 mov [rcx], dl     ; write 8 bits, that is hold in 'D' register, into memory.
