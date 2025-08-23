@@ -15,13 +15,13 @@ It contain first the return address, and then it is up to function to:
 ```asm
 func1 proc
 	push rbp
-	sub rsp, 10h + 10h + 20h
-	lea rbp, [rsp + 20h]
+	sub rsp, 10h + 10h + 20h				; 10h for local variables, 10h for arguments, 20h for shadow space
+	lea rbp, [rsp + 10h + 20h]				; rbp will hold address to local variables
 
-	stackframe equ 10h + 10h + 20h + 10h
+	stackframe equ 10h + 10h + 20h + 10h	; name equ text - wherever you use the name, the text is inserted
 
-	; save arguments if needed
-	; rsp + size of stackframe +
+	; save arguments, if needed, in shadow space of function that called this function
+	; rsp + size of stackframe + offset
 	mov [rsp + stackframe + 0], rcx			; arg 1
 	mov [rsp + stackframe + 8], rdx			; arg 2
 	mov [rsp + stackframe + 10h], r8		; arg 3
