@@ -1,5 +1,6 @@
 # Create a project with assembly
 Here I show you how to get started and create a minimal executable for console in assembly.<br>
+It is possible to combine C++ and assemby code.
 
 Download and install Visual Studio, start it. <br>
 https://visualstudio.microsoft.com/
