@@ -1,7 +1,7 @@
 # Calling convention
 
 ## Stack frame
-A function that calls other functions sets up a stack frame, you can say a stack frame is memory in the stack belonging to a function. 
+A function that calls other functions sets up a stack frame, you can say a stack frame is memory in the stack belonging to a function.<br> 
 It contain first the return address, and then it is up to function to:
 1. save basepointer if used. Typically done by instruction PUSH RBP. <br>
    This will also align the stack pointer by 16.
@@ -33,6 +33,16 @@ func1 proc
 	mov eax, [rsp + stackframe + 20h + 10h]	; arg 7
 	mov eax, [rsp + stackframe + 20h + 18h]	; arg 8
 
+	; call function that takes 6 arguments
+	mov ecx, 1
+	mov edx, 2
+	mov r8d, 3
+	mov r9d, 4
+	mov dword ptr [rsp + 20h], 5
+	mov dword ptr [rsp + 28h], 6
+	call otherFunction
+
+	; remove stack frame
 	add rsp, 10h + 10h + 20h
 	pop rbp
 	ret
