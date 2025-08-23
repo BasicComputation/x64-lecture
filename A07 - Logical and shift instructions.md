@@ -37,7 +37,7 @@ This means that a negative value can be halved. For example 1000(-8) SAR 1 = 110
 ```asm
 and al, F0h
 or bl, al
-xor cl, 10000000b ; bit 7 will become 1 if not 1, or become 0 if it is 1
+xor cl, 10000000b ; bit 7 in cl will become 1 if not 1, or become 0 if it is 1
 not dl
 
 mov al, 10010000b ; al = 144
