@@ -2,6 +2,9 @@
 Documentation: <br>
 https://learn.microsoft.com/sr-cyrl-rs/cpp/assembler/masm/microsoft-macro-assembler-reference?view=msvc-170
 
+Note: <br>
+For some strange reason, if you want set a register or variable to a value in hexadecimal, and that value <br>
+start with A,B,C,D,E of F, then you get an error, but adding a 0 infront fixes it.
 
 You can do many things in MASM. I only know a few things, here is a example. <br>
 
