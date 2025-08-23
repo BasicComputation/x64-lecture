@@ -59,7 +59,7 @@ db 'const section'
 db 'data section'
 
 
-; data? is reserved memory, part of same memory segment as where data section is loaded, useally
+; data? is reserved memory, part of same memory segment as where data section is loaded
 .data?
 db ?,?,?,?	; reserve 4 bytes
 
