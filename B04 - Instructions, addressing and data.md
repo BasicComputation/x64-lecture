@@ -82,7 +82,7 @@ mainCRTStartup proc
 
 	; MOV
 	; you can change any register you wish
-	; but the when addressing using register it has to be 32 or 64 bit
+	; but addressing uses 32 or 64 bit registers
 
 	; read RAM
 	mov ax, [rsi]
@@ -161,7 +161,7 @@ end
 ```asm
 ; (code section is below, the order doesnt matter)
 
-; define data structure name "div32"
+; define data structure named "div32"
 div32 struct
 	quotient dd ?
 	remainder dd ?
