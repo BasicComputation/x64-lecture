@@ -3,9 +3,9 @@ Ram is divided up into parts of 4096 bytes, or 1000h. Every part is called a pag
 Access to pages is restricted, the operating system sets up tables in RAM that holds information about which pages a program have access to. 
 Every page has a combination of permissions: read/write/execute, and more.
 
-A sequence of pages with the same permissions are called a memory segment.
+An array of pages with the same permissions are called a memory segment.
 
-An address a program sees is most likely not the actual address in RAM. <br>
+An address a program access is most likely not the actual address in RAM. <br>
 Addresses are translated into the real address by the information in the page tables. <br>
 See ‘virtual memory’.
 
