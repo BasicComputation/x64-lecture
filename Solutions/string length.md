@@ -43,12 +43,12 @@ strLength_v2 proc
 							; 1. is rcx == 0? if yes, skip the rest of instruction 
 							; 2. cmp al, [rdi] 3. inc rdi 4. dec rcx
 							
-	jne strToLong
+	jne strTooLong
 	sub ecx, max_length
 	not ecx
 	mov eax, ecx
 	ret
-strToLong:
+strTooLong:
 	mov eax, -1
 	ret
 strLength_v2 endp
