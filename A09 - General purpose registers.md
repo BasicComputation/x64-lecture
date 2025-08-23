@@ -1,6 +1,4 @@
 # General purpose registers
-Here is a overview of the registers used for integer operations.
-
 There are 16 registers considered general purpose in the CPU. <br>
 These are mainly used with whole numbers, called integers, and for holding memory addresses. <br>
 
