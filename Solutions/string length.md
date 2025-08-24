@@ -44,9 +44,9 @@ strLength_v2 proc
 							; 1. is rcx == 0? if yes, skip the rest of instruction 
 							; 2. cmp al, [rdi] 3. inc rdi 4. dec rcx
 							
-	jne strToLong
-	sub ecx, max_length
-	not ecx
+	jne strToLong			; did scasb give not equal at last pass ?
+	sub ecx, max_length		; get negative difference
+	not ecx					; NOT will give the positve value - 1
 	mov eax, ecx
 	ret
 strToLong:
