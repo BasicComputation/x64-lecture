@@ -65,7 +65,7 @@ void Test(int a, int b, int* ptr)
 
 ## Resources
 "amd64 architecture programmer's manual volumes 1-5" <br>
-CPU documentation, search for and download volumes 1, 3 and 4 <br>
+CPU documentation, search for and download volumes 1, 2, 3, 4, 5 <br>
 https://www.amd.com/
 
 C++ language and C/C++ library documentation <br>
