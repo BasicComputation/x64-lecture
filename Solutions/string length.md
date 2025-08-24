@@ -8,13 +8,14 @@ https://cplusplus.com/reference/cstring/strlen/
 
 ```asm
 .data
-str1 db 'abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234xxx', 0
+db 10 dup (?)
+str1 db '12345678', 0
 
 
 .code
 
 mainCRTStartup proc
-	mov eax, ffffffffh
+
 	lea rcx, [str1]
 	call strLength_v4
 	ret
@@ -43,12 +44,12 @@ strLength_v2 proc
 							; 1. is rcx == 0? if yes, skip the rest of instruction 
 							; 2. cmp al, [rdi] 3. inc rdi 4. dec rcx
 							
-	jne strTooLong
+	jne strToLong
 	sub ecx, max_length
 	not ecx
 	mov eax, ecx
 	ret
-strTooLong:
+strToLong:
 	mov eax, -1
 	ret
 strLength_v2 endp
@@ -101,33 +102,33 @@ strLength_v3 endp
 
 
 strLength_v4 proc
+	mov rdx, rcx
+	mov r8, rcx
 
-	mov rbx, rcx
-	
-@1:	test cl, 1Fh		; is address aligned by 32 ?
-	jz @2
+	and dl, 0E0h	; align address down to 32
+	and cl, 1Fh		; get offset to address provided
 
-	; compare a byte at the time, can be optimized as up to 31 bytes needs to be checked
-	cmp byte ptr [rcx], 0
-	je @f
-	inc rcx
-	jmp @1
+	vpxor ymm0, ymm0, ymm0
 
-@@:	sub rcx, rbx
-	mov eax, ecx
-	ret
-
-@2:	vpxor ymm1, ymm1, ymm1
-@@:	vpcmpeqb ymm1, ymm1, ymmword ptr [rcx]	; compares 32 bytes at once
+@@:	vpcmpeqb ymm1, ymm0, ymmword ptr [rdx]	; compares 32 bytes at once
 	vpmovmskb rax, ymm1
-	bsf rax, rax
-	jnz @f
-	add rcx, 32
+
+	; clear out lower bits of result, only relevant for first comparison
+	shr eax, cl
+	shl eax, cl
+
+	bsf eax, eax	; find distance to a 0 if any
+	jnz @f			; jump if set bit is present
+	
+	xor cl, cl
+	add rdx, 32
 	jmp @b
 
-@@:	sub rcx, rbx
-	add rax, rcx
+@@:	add rdx, rax	; get address of 0
+	sub rdx, r8		; get length
+	mov rax, rdx
 	ret
+
 strLength_v4 endp
 
 
@@ -137,10 +138,10 @@ strLength_v5 proc
 	mov edx, 16
 	xor ebx, ebx
 
-@1:	test sil, 0Fh		; aligned by 16 ?
+	; when not aligned, do byte comparison, up to 15. so not good
+@1:	test sil, 0Fh
 	jz @2
 
-	; compare a byte at the time, can be optimized as up to 15 bytes needs to be checked
 	cmp byte ptr [rsi], 0
 	je @f
 	inc rsi
@@ -160,6 +161,7 @@ strLength_v5 proc
 	mov rax, rbx
 	ret
 strLength_v5 endp
+
 
 end
 ```
