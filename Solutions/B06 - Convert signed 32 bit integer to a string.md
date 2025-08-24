@@ -30,11 +30,12 @@ cvt_int2str proc
 	; edx = 32 bit signed integer
 
 	mov eax, edx
-	mov r10, -1				; index into stack for temporary storage of result
-	mov r11d, 66666667h		; magic number for dividing 32 bit signed number by 10, by means of multiplication
+	xor r10d, r10d			; index into stack array
+	mov r9d, 10				; divisor
+	mov r11d, 66666667h		; magic number for 32 bit division by 10 by multiplication
 
-	test eax, eax    ; perform AND without storing result, setting zero and sign flag.
-	jns @f          ; is value negative ?
+	test eax, eax
+	jns @f					; is value negative ?
 	neg eax
 	mov byte ptr [rcx], '-'
 	inc rcx
@@ -53,13 +54,12 @@ cvt_int2str proc
 
 	; temporary save value as character
 	add r15b, '0'				; remainder + '0'
+	dec r10
 	mov [rsp + r10], r15b		; temp storage
 
 	; end of number ?
 	test eax, eax
-	jz @f					; is value 0?
-	dec r10					; change index
-	jmp @b
+	jnz @b					; is value 0?
 
 	; save characters in correct order at destination
 @@: mov al, [rsp + r10]
@@ -71,6 +71,4 @@ cvt_int2str proc
 	ret
 
 cvt_int2str endp
-
-end
 ```
