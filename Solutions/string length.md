@@ -56,47 +56,43 @@ strLength_v2 endp
 
 
 strLength_v3 proc
+	mov rbx, rcx		; rbx holds copy of address provided for getting length
+	mov rdx, rcx		; rdx holds aligned address from where to read 8 bytes
 	
-	mov rbx, rcx
+	and dl, 0F8h		; align rdx
+	and cl, 7			; get offset from aligned address to first byte in string
+	shl cl, 3			; cl will be used to shift out unwanted bytes, so times 8 get number of bits to shift
 
-; byte compare - do this as long as address is not aligned by 8
-@1:	test cl, 7				; is address aligned by 8? (value 7 is 0111b, if last 3 bits is 0 then address is aligned by 8)
-							; if not, compare a byte at the time
-	jz @2
+	; "magic numbers"
+	mov r8, 8080808080808080h
+	mov r9, 0101010101010101h
 
-	cmp byte ptr [rcx], 0
-	je @f
-	inc rcx
-	jmp @1
-
-@@:	mov rax, rcx
-	sub rax, rbx
-	ret
-
-; part of trick to find occurance of 8 bits with value 0 in quadword 
-@2:	mov r8, 08080808080808080h
-	mov r9, 00101010101010101h
-
-	; get 8 bytes at the time from a aligned address
-@3:	mov rax, [rcx]
+@@:	mov rax, [rdx]		; get 8 bytes from aligned address
 
 	; this part is the trick, a 8 bit portion will become 80h if zero, else 0
-	; pattern = (v - 00101010101010101h) & ~v & 08080808080808080h
+	; pattern = (v - 00101010101010101h) & ~v & 08080808080808080h	
 	mov r10, rax
 	not r10
 	sub rax, r9
 	and rax, r10
 	and rax, r8
-	
-	test rax, rax
-	jnz @f			; if not zero mean that a 0 was found in quadword
-	add rcx, 8
-	jmp @3
 
-@@:	bsf rax, rax	; bit scan forward: give position of first set bit, scans from right to left. 80h = bit nr 8, 8000h = bit nr 16...
-	shr rax, 3		; divide by 8 - gets byte position of set bit
-	sub rcx, rbx	; get offset in memory that was read from
-	add rax, rcx	; add with offset to byte containing value 0
+	; make unwanted part of pattern 0
+	shr rax, cl
+	shl rax, cl
+
+	test rax, rax		; does pattern contain 80h ? that is was a 0 found
+	jnz @f
+	xor cl, cl			; no longer need to clear out part of pattern
+	add rdx, 8			; update address to read from
+	jmp @b
+
+@@:	bsf rax, rax		; bit scan forward: give position of first set bit, 
+						; scans from right to left. 80h = bit nr 7, 8000h = bit nr 15...
+	shr rax, 3			; get byte position
+	add rdx, rax		; add to aligned address
+	sub rdx, rbx		; subtract that address with address provided
+	mov rax, rdx		; return length
 	ret
 
 strLength_v3 endp
