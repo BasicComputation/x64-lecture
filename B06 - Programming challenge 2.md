@@ -1,7 +1,6 @@
 # Challenge
 Convert a 32 bit signed integer into a string. <br>
 Create a function takes in the number and address to where to store the result.<br>
-Also provide code for success or failure.
 
 ### Hint
 - Division instructions, DIV and IDIV, gives the remainder of division in 'D' register. <br>
