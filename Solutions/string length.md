@@ -107,8 +107,8 @@ strLength_v4 proc
 
 	vpxor ymm0, ymm0, ymm0
 
-@@:	vpcmpeqb ymm1, ymm0, ymmword ptr [rdx]	; compares 32 bytes at once
-	vpmovmskb rax, ymm1
+@@:	vpcmpeqb ymm1, ymm0, ymmword ptr [rdx]	; compares 32 bytes at once, give FFh per byte if equal
+	vpmovmskb rax, ymm1						; extract sign bits, put them in order in rax
 
 	; clear out lower bits of result, only relevant for first comparison
 	shr eax, cl
