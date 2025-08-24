@@ -105,7 +105,7 @@ strLength_v4 proc
 	and dl, 0E0h	; align address down to 32
 	and cl, 1Fh		; get offset to address provided
 
-	vpxor ymm0, ymm0, ymm0
+	vpxor ymm0, ymm0, ymm0		; packed xor: ymm0 becomes 0
 
 @@:	vpcmpeqb ymm1, ymm0, ymmword ptr [rdx]	; compares 32 bytes at once, give FFh per byte if equal
 	vpmovmskb rax, ymm1						; extract sign bits, put them in order in rax
@@ -115,7 +115,7 @@ strLength_v4 proc
 	shl eax, cl
 
 	bsf eax, eax	; find distance to a 0 if any
-	jnz @f			; jump if set bit is present
+	jnz @f			; jump if set bit is  present
 	
 	xor cl, cl
 	add rdx, 32
