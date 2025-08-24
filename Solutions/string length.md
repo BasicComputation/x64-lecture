@@ -81,6 +81,7 @@ strLength_v3 proc
 @3:	mov rax, [rcx]
 
 	; this part is the trick, a 8 bit portion will become 80h if zero, else 0
+	; pattern = (v - 00101010101010101h) & ~v & 08080808080808080h
 	mov r10, rax
 	not r10
 	sub rax, r9
