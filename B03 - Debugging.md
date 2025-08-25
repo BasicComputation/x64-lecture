@@ -73,7 +73,13 @@ The application is built and started in debug mode. You can see a yellow arrow a
 5. Now you can press F11 to step through and see the results in registers. When you get to where the result is stored, <br>
    notice that where memory has been modified is colored red. So you see -30 stored.
 6. To let the program run to the next breakpoint or to the end, press the green arrow "continue", or to stop execution press the red square. <br>
-  
+
+## Note about flags
+AMD manual the flags are named like this: <br>
+Carry – CF | Overflow – OF | Sign – SF | Zero – ZF | Auxiliary – AF | Parity – PF | Direction – DF <br>
+Microsoft name flags like this:	<br>
+Carry – CY | Overflow – OV | Sign – PL | Zero – ZR | Auxiliary – AC | Parity – PE | Direction – UP
+
 ## More debugging
 While debugging you can also go to menu->Windows->Disassembly <br>
 There you see the disassembled view of memory, so machine instruction presented in assembly form. <br>
@@ -94,13 +100,6 @@ the prior call you see in the disassembly window somehow called mainCRTStartup.
 
 The call stack window show which functions has called which, the kernel32.dll function has been called by a function in ntdll.dll. <br>
 If you follow the path you will eventually get into a function in ntdll.dll that has a SYSCALL instruction that finally closes the process.
-
-
-## Note about flags
-AMD manual the flags are named like this: <br>
-Carry – CF | Overflow – OF | Sign – SF | Zero – ZF | Auxiliary – AF | Parity – PF | Direction – DF <br>
-Microsoft name flags like this:	<br>
-Carry – CY | Overflow – OV | Sign – PL | Zero – ZR | Auxiliary – AC | Parity – PE | Direction – UP
 
 ## Multiplication and division examples
 Test out debugging this code if you want to and learn about the different multiplication and division instructions.
