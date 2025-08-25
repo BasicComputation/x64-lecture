@@ -46,6 +46,6 @@ So AE is above or equal for example.
 ```asm
   cmp ax, bx      ; compare the 16 bit portions of 'A' register and 'B'
   jne -10         ; jump if not equal to IP + (-10)
-  cmova ax, bx    ; copy bx into ax if above. So ax = bx if ax < bx
+  cmova ax, bx    ; copy bx into ax if above. So ax = bx if ax > bx
   setc cl         ; set 8 bit portion of 'C' register to 1 if carry flag is set, 0 otherwise.
 ```
