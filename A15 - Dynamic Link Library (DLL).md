@@ -41,8 +41,8 @@ call [malloc]
 
 ```
 
-In Windows, the DLL ntdll.dll is always present for an application, infact it contains the actual starting point of an application, or rather a process. 
-So a function in ntdll.dll calls the applications entry function (starting point). <br>
+In Windows, the DLLs ntdll.dll and kernel32.dll are always present for an application, ntdll.dll contains the actual starting point of an application, or rather a process. 
+Starting function in ntdll.dll calls a function in kernel32.dll that calls the applications entry function (starting point). <br>
 I don't know what is going on in ntdll.dll, it is not documented. <br>
 
 When you call a function in kernel32.dll for example, which is documented, that dll eventually call a function in ntdll.dll <br>
