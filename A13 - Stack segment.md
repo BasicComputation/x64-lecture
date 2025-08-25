@@ -18,15 +18,15 @@ RET instruction returns from a CALL, that is it reads 64 bits from address point
 and then adds 8 to RSP, and then set the instruction pointer to what was read.
 
 This makes it possible to have sequences of instruction that can be called any number of times, <br>
-these sequences are called functions. Also the stack is used for temporary storage of data for a function. <br>
-This is achieved by subtracting the stack pointer. 
+these sequences are called functions. Functions can call other functions and so on. <br>
+Also the stack is used for temporary storage of data for a function, this is achieved by subtracting the stack pointer. 
 
 Note: the stack pointer should point to address that is aligned by 16 before calling another function. <br>
 Aligned by 16 means that the first 4 bits in a address is 0. <br>
-Floating point instructions often require the data it access from memory to be align by 16, or else...<br>
+Floating point instructions often require the data it access from memory to be align by 16.<br>
 
 ```asm
-; How the stack is setup for functions in Windows programs.
+; How the stack is setup for functions in Windows programs:
 ; Presume that a function has called function1.
 ; function1 will call function2. function2 takes in 4 arguments in registers C,D,8,9
 ; I will go through this later on in more detail, don't worry.
