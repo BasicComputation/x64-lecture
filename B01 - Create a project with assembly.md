@@ -1,10 +1,11 @@
 # Create a project with assembly
-Here I show you how to get started and create a minimal executable for console in assembly.<br>
-It is possible to combine C++ and assemby code.
+- Create a minimal executable for console in assembly.
+- Text editing tips for Visual Studio.
 
 Download and install Visual Studio, start it. <br>
 https://visualstudio.microsoft.com/
 
+## Create project, write code, build executable and run it.
 1. Select "Create a new project"
 
 2. Select C++, Windows, console and then select emty project. Press Next.
@@ -38,7 +39,7 @@ mainCRTStartup proc      ; mainCRTStartup is the name of a address,
                          ; mainCRTStartup is by default the entry function name in C++ console projects.
                          ; Entry function name can be changed
 
-  mov eax, 10            ; the 32 bit exit code is put in 'A' register
+  mov eax, 10            ; the 32 bit exit code is put in 32 bit part of 'A' register
 
   ret                    ; read value at address contained in rsp, set instruction pointer to what was read,
                          ; returning to the function that called the entry point of your program, mainCRTStartup.
@@ -71,3 +72,17 @@ You can read the exit code there when the application closes.
    - When you are in the folder of the executable, write the name of the executable to run it. <br>
      Do not need to end it with ".exe". <br>
    - To display the exit code of a program, type "echo %ERRORLEVEL%"
+
+## Editing tips
+To make your code look clean you often tabulate with the tab key. <br>
+In the editor you can select several lines and tabulate them all at the same time with the tab key. <br>
+If you want the text a step back you can hold the shift key and press tab.
+
+To change text in several lines at any position at once, select a place in text, hold alt key and then hold shift key, <br>
+use down or up arrow keys to select more lines of text, then release alt and shift keys, now you can:
+- insert text at the positions.
+- hold shift and use right or left arrow keys to select text.
+- press end key to get to the end of text in each line or home key to get to the beginning of text.
+
+
+
