@@ -17,8 +17,9 @@ There are several options:
   
   C library functions for input and output are also documented for example here: <br>
   https://cplusplus.com/reference/cstdio/ <br>
-  
+
 ## Lets first print out some text using the function puts. I explain puts below. <br>
+Further down are some tips for debugging for calling functions.
 
 ```asm
 ; "The Universal CRT (UCRT) contains the functions and globals exported by the standard C99 CRT library"
@@ -90,6 +91,19 @@ In the documentation: <br>
 EOF is a negative value, so eax will have that value. <br>
 "error indicator" is, as I understand it, a variable for the C library that is set to signal a error has occured, <br>
 it resides in a data segment belonging to the DLL.
+
+
+## Debugging tips
+When you get to a call to a function, you can press F10 (step over) to execute the whole function at once. <br>
+
+When stepping into (F11) a call to a DLL function, you get some message saying that for example "ucrtbase.pdb not included". <br>
+This means there is no source code avialable. To see where the execution is halted, goto menu->Windows select Disassembly. <br>
+
+Also when a call to a function occure, the debugger keep track of which function it currently in, and where it came from. <br>
+Goto menu->Windows select "Call Stack". In the call stack window you see list of calls, the one at top is the current. <br>
+You will see in the list the name of program or DLL for each call, along with current address or the address after a call. <br>
+In the list you can double click at one of the calls to get back. In disassembly window you can insert breakpoints aswell. <br>
+
 
 ## Getting input
 In this example I will use the C library function "gets" to get a string of characters. <br>
