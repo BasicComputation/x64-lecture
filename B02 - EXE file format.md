@@ -1,6 +1,7 @@
 # EXE file format
 A EXE file is divided into sections. The first section is the format, and size is in hexadecimal 400h. <br>
-The file format is called Portable Exectuable.
+The file format is called Portable Exectuable. (DLLs use the same format)
+
 
 Common sections are 
 - .code - also refered to as .text, is for instructions
@@ -8,8 +9,8 @@ Common sections are
 - .data - is for writable data
   
 The format contains information about the executable file. <br>
-- Offsets of sections in the file
-- The size of sections and the size of memory segment the section is loaded into.
+- Offsets to sections in the file
+- The size of sections and the size of memory segment the section is to be loaded into.
 - The permissions for the memory segments where the sections are load into: read, write, execute <br>
 - The offset in memory to the entry point of the program.
 - Offset to information about which DLL files and functions are needed (is found in const section). <br>
