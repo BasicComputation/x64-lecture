@@ -26,10 +26,20 @@ mainCRTStartup proc
 							; The result is negative in eax, so incorrect
 							; therby setting the carry and overflow flags to 1
 	jno @f
-	xor eax, eax	
-@@:	ret
+	nop						; no operation instruction
+@@:
+
+	call Function1
+
+ret
 
 mainCRTStartup endp
+
+
+Function1 proc
+	mov eax, 10
+	ret
+Function1 endp
 
 
 .data
@@ -40,7 +50,7 @@ mainCRTStartup endp
 end
 ```
 
-### Instructions
+## Instructions
 To debug you must specify where the program shall halt, in the source code at the leftmost side, press to insert a breakpoint. <br>
 You can have as many as you want. <br>
 <img width="662" height="67" alt="image" src="https://github.com/user-attachments/assets/2bc0559d-bc6b-4217-a960-241e80fb29af" /> <br>
@@ -55,22 +65,16 @@ The application is built and started in debug mode. You can see a yellow arrow a
    Also in "columns" select 16, so there are 16 bytes per row.<br>
 3. Go to menu->debug, there you see step into (F11), step over (F10).<br>
 	"step over" is to execute a single instruction and also a whole function call. <br>
-	"step through" is to execute a single instruction, do press F11. <br>
- The value in register R8 is now colored red, that means the value is different than what it was. <br>
-4. So R8 holds now the address of numbers. Copy the value in R8 and paste it into Memory viewer's address, press enter. <br>
-  Right click in Memory and select "4 byte integer", since our data is double words (32 bit / 4 bytes) we now see them arranged correctly. <br>
+	"step into" is to execute a single instruction, do press F11. <br>
+ 	The value in register R8 is now colored red, that means the value is different than what it was. <br>
+4. So R8 holds now the address of "numbers". Copy the value in R8 and paste it into memory viewer's address, press enter. <br>
+  Right click in Memory and select "4 byte integer", since our data is double words (32 bit or 4 bytes) we now see them arranged correctly. <br>
   Right click again in Memory and select "Signed Display". So now you the values in decimal as signed numbers, 10 and -3. <br>
 5. Now you can press F11 to step through and see the results in registers. When you get to where the result is stored, <br>
    notice that where memory has been modified is colored red. So you see -30 stored.
 6. To let the program run to the next breakpoint or to the end, press the green arrow "continue", or to stop execution press the red square. <br>
   
-### Note about flags
-AMD manual the flags are named like this: <br>
-Carry – CF | Overflow – OF | Sign – SF | Zero – ZF | Auxiliary – AF | Parity – PF | Direction – DF <br>
-Microsoft name flags like this:	<br>
-Carry – CY | Overflow – OV | Sign – PL | Zero – ZR | Auxiliary – AC | Parity – PE | Direction – UP
-
-## More about debugging
+## More debugging
 While debugging you can also go to menu->Windows->Disassembly <br>
 There you see the disassembled view of memory, so machine instruction presented in assembly form. <br>
 In "Viewing Options":<br>
@@ -78,9 +82,25 @@ In "Viewing Options":<br>
 - select "Show Source code" to see the source code along with disassembly
 - select "Show address" to see the address of each machine instruction
 - select "Show symbol names" to see the names of addressses in disassembly code
-
 Note that when a instruction read or write data, relative addresses are computated and shown within parentheses. <br>
-You see a lot of "add byte ptr [rax],al", that is the disassembled view of data containing two bytes with the value 0.
+You see a lot of "add byte ptr [rax],al", that is the disassembled machine instruction with the value 00 00.
+
+In the program above, before you execute the RET instruction of mainCRTMain, have dissambly window open. <br>
+Also go to menu->Debug->Windows select "Call Stack". Call stack shows which function you are in in an executable or DLL. <br>
+Press F11 to execute the RET instruction, then you get a message "kernel32.pdb not included". <br>
+Select disassembly window, there you see alot of instruction, look in the call stack window, there you see from the top <br>
+"kernel32.dll ! address()" , "ntdll.dll ! address(). Currently the application is in a function in kernel32.dll, <br>
+the prior call you see in the disassembly window somehow called mainCRTStartup. 
+
+The call stack window show which functions has called which, the kernel32.dll function has been called by a function in ntdll.dll. <br>
+If you follow the path you will eventually get into a function in ntdll.dll that has a SYSCALL instruction that finally closes the process.
+
+
+## Note about flags
+AMD manual the flags are named like this: <br>
+Carry – CF | Overflow – OF | Sign – SF | Zero – ZF | Auxiliary – AF | Parity – PF | Direction – DF <br>
+Microsoft name flags like this:	<br>
+Carry – CY | Overflow – OV | Sign – PL | Zero – ZR | Auxiliary – AC | Parity – PE | Direction – UP
 
 ## Multiplication and division examples
 Test out debugging this code if you want to and learn about the different multiplication and division instructions.
