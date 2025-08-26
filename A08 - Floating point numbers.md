@@ -17,7 +17,7 @@ The number 1 is added to the mantissa, so if mantissa is 0.5 (2^-1) it is actual
 The exponent bits is a unsigned number, in a float that number is subtracted by the CPU with 127 to get the exponent.
 
 ### Example
-If resulting exponent is 4, and mantissa is 110100000.... then to calculate the value: <br>
+If resulting exponent is 4, and mantissa is 110100000.... with the implicit one its 1.1101, then to calculate the value: <br>
 (2^0 + 2^-1 + 2^-2 + 2^-4) * 2^4 <br>
 = 2^(0+4) + 2^(-1+4) + 2^(-2+4) + 2^(-4+4) <br>
 = 2^4 + 2^3 + 2^2 + 2^0 <br>
