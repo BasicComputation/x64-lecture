@@ -6,11 +6,11 @@ It contain first the return address, and then it is up to function to:
 1. save basepointer if used. Typically done by instruction PUSH RBP. <br>
    This will also align the stack pointer by 16.
 3. Reserve room for local variables (storage for data) by subtracting the stack pointer. <br>
-4. Reserve room for additional arguments for other functions by subtracting the stack pointer. <br>
-  In Windows the convention is that each argument takes up 8 bytes, even if it is only a byte passed. <br>
-5. In Windows you also subtract the stack pointer by 20h for "shadow space", this is where a called function <br>
+4. Only 4 registers are used to pass arguments to a function, for more arguments reserve room for additional arguments by subtracting the stack pointer.
+	In Windows the convention is that each argument takes up 8 bytes, even if it is only a byte. <br>	
+6. In Windows you also subtract the stack pointer by 20h for "shadow space", this is where a called function <br>
   can save arguments passed via registers. So 20h is 4*8 bytes, so 4 register argument can be saved if needed. <br>
-6. Lastly set base pointer to point to the first local variable
+7. Lastly set base pointer to point to the first local variable
 
 ```asm
 func1 proc
