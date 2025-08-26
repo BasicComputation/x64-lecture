@@ -75,9 +75,9 @@ The application is built and started in debug mode. You can see a yellow arrow a
 6. To let the program run to the next breakpoint or to the end, press the green arrow "continue", or to stop execution press the red square. <br>
 
 ## Note about flags
-AMD manual the flags are named like this: <br>
+**AMD manual the flags are named like this:** <br>
 Carry – CF | Overflow – OF | Sign – SF | Zero – ZF | Auxiliary – AF | Parity – PF | Direction – DF <br>
-Microsoft name flags like this:	<br>
+**Microsoft name flags like this:**	<br>
 Carry – CY | Overflow – OV | Sign – PL | Zero – ZR | Auxiliary – AC | Parity – PE | Direction – UP
 
 ## More debugging
@@ -93,19 +93,22 @@ You see a lot of "add byte ptr [rax],al", that is the disassembled machine instr
 
 In the program above, before you execute the RET instruction of mainCRTMain, have dissambly window open. <br>
 Also go to menu->Debug->Windows select "Call Stack". Call stack shows which function you are in in an executable or DLL. <br>
+
 Press F11 to execute the RET instruction, then you get a message "kernel32.pdb not included". <br>
-Select disassembly window, there you see alot of instruction, look in the call stack window, there you see from the top <br>
-"kernel32.dll ! address()" , "ntdll.dll ! address(). Currently the application is in a function in kernel32.dll, <br>
-the prior call you see in the disassembly window somehow called mainCRTStartup. 
+This means that there is no source code available for debugger for kernel32.dll.
+
+Select disassembly window, there you see part of kernel32.dll, look in the call stack window, there you see from the top: <br>
+"kernel32.dll ! address()" and "ntdll.dll ! address(). Currently the application is in a function in kernel32.dll. <br>
+The prior CALL instruction you see in the disassembly window called a function that most likely had a JMP [reg/mem] instruction, where <br>
+register or memory location had the address to mainCRTStartup. 
 
 The call stack window show which functions has called which, the kernel32.dll function has been called by a function in ntdll.dll. <br>
 If you follow the path you will eventually get into a function in ntdll.dll that has a SYSCALL instruction that finally closes the process.
 
-## Multiplication and division examples
-Test out debugging this code if you want to and learn about the different multiplication and division instructions.
-You find out that the program crashes at one point. That is when the result from the division is to large for the
-destination register. Also try to divide by 0 and see the message given. while you are at it, try writing into or read from address 0.
-To do that give a register the value 0, and then "mov al, [register]" for example.
+## Multiplication and division examples + exceptions
+Test out debugging code below to learn about the different multiplication and division instructions.
+You find out that the program crashes at one point. That is when the result from the division is to large for the destination register (integer overflow exception). <br>
+Also try to divide by 0 and see the message given. While you are at it, try writing into or read from address 0, to do that give a register the value 0, and then "mov al, [register]" for example.
 
 ```asm
 ; see AMD manual for instruction reference - volume 3 chapter 3
