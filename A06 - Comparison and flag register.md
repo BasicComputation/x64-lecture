@@ -32,7 +32,7 @@ The conditions are
 - A - above (unsigned)
 - L - less (signed)
 - G - greater (signed)
-- S - sign (is negative)?
+- S - sign (is negative?)
 - C - carry
 - O - overflow
 - A - auxillary (not used, it's a flag)
@@ -44,8 +44,8 @@ So AE is above or equal for example.
 
 ### Example
 ```asm
-  cmp ax, bx      ; compare the 16 bit portions of 'A' register and 'B'
+  cmp ax, bx      ; compare the 16 bit portions of 'A' register and 'B' (ax - bx and set the flags)
   jne -10         ; jump if not equal to IP + (-10)
-  cmova ax, bx    ; copy bx into ax if above. So ax = bx if ax > bx
+  cmovae ax, bx   ; copy bx into ax if above or equal. So ax = bx if ax >= bx
   setc cl         ; set 8 bit portion of 'C' register to 1 if carry flag is set, 0 otherwise.
 ```
