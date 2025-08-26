@@ -1,5 +1,13 @@
 # Debugging
-Here I teach you basic debugging in Visual Studio. Copy the code example below and lets get started. <br>
+Debugging is to halt the execution of a program at specified memory locations, called breakpoints, and inspect content of registers and memory at that point. 
+A single instruction or function can be executed at the time, or letting the program run until another break point is hit or the program ends. 
+Break points can be set prior to running debug mode, but also while debugging.
+
+This is useful when you need to track down what causes something unexpected to happen. <br>
+In our case debugging is useful for learning as you can inspect the result of a instruction in registers and memory.
+
+Here is a step by step guide for basic debugging in Visual Studio. <br>
+Copy the code example below and lets get started. <br>
 ```asm
 ; see AMD manual for instruction reference - volume 3 chapter 3
 .code
@@ -15,7 +23,7 @@ mainCRTStartup proc
 							; Result is of double size, so upper bits are in stored in 'D' register
 							; IMUL sets carry and overflow flag to 1 if the result overflowed
 	jno @f					; Jump to nearest @@ forward if not overflow 
-	xor eax, eax			; return code = 0
+	mov eax, -1				; return code = -1
 	ret
 
 @@:	mov [product], eax		; store the result in RAM
