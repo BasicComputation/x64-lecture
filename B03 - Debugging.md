@@ -16,6 +16,8 @@ mainCRTStartup proc
 	lea r8, [numbers]		; get address of data for inspection
 							; LEA = Load Effective Address:
 							; here LEA will take the instructions pointer and add it with the offset to "numbers"
+	; You could copy the value of instruction pointer, you find it in register window,
+	; aligned the value down to 1000h and add 2000h, as .code section and .const section in this example takes up 1000h bytes each.
 
 	mov eax, [numbers]		; eax will be 10
 	imul [numbers + 4]		; IMUL is signed multiplication
@@ -95,7 +97,7 @@ In "Viewing Options":<br>
 - select "Show Code bytes" to see the data of each machine instruction
 - select "Show Source code" to see the source code along with disassembly
 - select "Show address" to see the address of each machine instruction
-- select "Show symbol names" to see the names of addressses in disassembly code
+- select "Show symbol names" to see the names of addresses in disassembly code <br>
 Note that when a instruction read or write data, relative addresses are computated and shown within parentheses. <br>
 You see a lot of "add byte ptr [rax],al", that is the disassembled machine instruction with the value 00 00.
 
@@ -123,72 +125,83 @@ Also try to divide by 0 and see the message given. While you are at it, try writ
 .code
 
 mainCRTStartup proc
-	
-	; unfortunately the address of segment where data is, is not visible
 	lea r8, [numbers]		; get address of "numbers"
 
-	; - unsigned multiplication -
-	mov eax, [numbers]		; eax = 10
-	mul [numbers + 4]		
-							; edx:eax = eax * [numbers + 4] (that is 3)
-							;  carry and overflow flag are set to 1 if the result did not fit 32 bits
-							;  MUL will set the upper 32 bits of the 64 bit result in edx
-							;  - if you multiply 16 bits you get a 32 bit answer -> dx:ax
-							;  - if you multiply 64 bits you get a 128 bits answer -> rdx:rax
-							;  - if you multiply 8 bits you get a 16 bit answer in ax
+	; -- unsigned multiplication --
+	mov eax, 10
+	mov ebx, 3
+	mul ebx			; edx:eax = eax * ebx 
+					;  MUL will set the upper 32 bits of the 64 bit result in edx
+					;  - if you multiply 16 bits you get a 32 bit answer -> dx:ax
+					;  - if you multiply 64 bits you get a 128 bits answer -> rdx:rax
+					;  - if you multiply 8 bits you get a 16 bit answer in ax
+					;  carry and overflow flag are set to 1 if the result did not fit 32 bits
 
-	jnc @f					; did the result fit 32 bits? if yes jump to nearest @@ forward
-	mov [product], -1		; store the value -1 as result if it did overflow
-	jmp @1					; jump to unnamed label @1
-@@: mov [product], eax
-@1:
-	
-	; - signed division -
-	; division, like multiplication, uses the value in 'D' register as the upper bits for the value
-	; so in 32 bit division its 64 bits / 32 bits. If result is larger than 32 bits a integer overflow exception occures
-	; crashing the program
-	; also dividing with 0 crashes the program
-	mov eax, [numbers + 8]	; get value -14
-	cdq						; sign extend double to quad -> sign of eax is extended into edx
-	idiv [numbers + 12]		; eax = edx:eax / 3  edx = remainder (so eax will be -4 and edx = -2 )
-	mov [quotient], eax
-	mov [remainder], edx
-	
-	; - signed multiplication
+	; -- signed multiplication --
 	; IMUL have more options than MUL - see the manual
-	imul eax, [numbers + 12]	; eax = eax * [number + 12]  -4*3 = -12  (Note that edx is not affected in this case)
-	add eax, edx				; -12 + -2 = -14
 
-	mov ebx, 2
-	imul ebx				; edx:eax = eax * ebx
+	mov eax, -10
+	mov ebx, 3
+	imul ebx		; edx:eax = eax * ebx
+					; edx will be all ones when result is negative extending the sign, 0 otherwise.
+
+	imul rcx, r8	; rcx = rcx * r8	(Note that edx is not affected in this case)
 
 	imul r9d, ebx, 10		; r9d = ebx * 10	(Note that edx is not affected in this case)
 
-	; - unsigned division -
-	mov ebx, 4
-	xor edx, edx			; edx = 0
-	div ebx					; eax = edx:eax / ebx , edx = remainder (eax = 3 edx = 2)
 
-	; Hardware fault example
+	; -- unsigned division --
+	; Division uses the value in 'D' as part of division.
+	; It contains the upper bits of number in 'A' register
+	; When performing unsigned division 'D' register normally is set to 0
+	; Resulting qotient is found in 'A' and remainder in 'D'
+	mov eax, 11
+	mov ebx, 4
+	xor edx, edx		; edx = 0
+	div ebx				; eax = edx:eax / ebx -> eax = 2 edx = 3
+
+	mov ax, 105
+	mov r8w, 10
+	xor edx, edx
+	div r8w				; ax = 10 , dx = 5
+
+	; byte division
+	; ah:al / reg|mem
+	; ah is the upper 8 bits of the lower 16 bits
+	mov al, 10
+	mov bl, 3
+	mov ah, 0
+	div bl			; ah:al / bl	al = quotient , ah = remainder
+	mov dl, ah
+	
+	
+
+	; -- signed division --
+	mov eax, -14
+	mov ebx, 3
+	cdq						; sign extend double to quad -> sign of eax is extended into edx
+	idiv ebx				; eax = edx:eax / ebx  		eax will be -4 and edx = -2
+
+	; Sign extend into D:A instructions:
+	; CWD Sign-extend AX into DX:AX.
+	; CDQ Sign-extend EAX into EDX:EAX.
+	; CQO Sign-extend RAX into RDX:RAX.
+	
+
+	; -- Exception --
 	; a #DE (divide error) exception - integer overflow
-	mov edx, 2
+
 	mov eax, 0
 	mov ebx, 2
-	idiv ebx		;  edx:eax = 2:00000000h / 2 = 1:00000000h (overflow as edx > 0)
+	mov edx, 2
+	idiv ebx		;  edx:eax = 2:00000000h / 2 = 1:00000000h (overflow as edx is greater than 0)
+
+
 
 	xor eax, eax
 	ret
 mainCRTStartup endp
 
-
-.data
-
-	numbers dd 10, 3, -14, 3
-
-	product dd ?
-
-	quotient dd ?
-	remainder dd ?
 
 end
 ```
