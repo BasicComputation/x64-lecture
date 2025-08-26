@@ -1,23 +1,23 @@
 # EXE file format
-A EXE file is divided into sections. The first section is the format, and size is in hexadecimal 400h. <br>
-The file format is called Portable Exectuable. (DLLs use the same format)
+The executable file format in Windows is called Portable Exectuable (DLLs use the same format). <br>
+An EXE file's data is divided into sections. The first section is the header, and size is in hexadecimal 400h. <br>
 
-
-Common sections are 
+Other common sections are 
 - .code - also refered to as .text, is for instructions
 - .const - also refered to as .rdata, is for read only data
-- .data - is for writable data
+- .data - is for readable and writable data
   
-The format contains information about the executable file. <br>
+The header contains information about the executable file. <br>
 - Offsets to sections in the file
 - The size of sections and the size of memory segment the section is to be loaded into.
 - The permissions for the memory segments where the sections are load into: read, write, execute <br>
 - The offset in memory to the entry point of the program.
 - Offset to information about which DLL files and functions are needed (is found in const section). <br>
   Also in memory segment where const section is loaded, the addresses of the functions are stored
+- Size of stack and heap, commited and reserved sizes.
 - And other information and settings, like is it a console or GUI (Graphical User Interface) application.
 
-The operating system setup a memory segment where the format is loaded into, it has read permission. <br>
+The operating system setup a memory segment where the header section is loaded into, it has read permission. <br>
 It is logical that the operating system then setup memory segments for the sections according to the information, and then load them. <br>
 The process of loading DLL files into memory is then started, and addresses of functions are then stored at <br>
 specified locations, according to the information in the executable file. 
