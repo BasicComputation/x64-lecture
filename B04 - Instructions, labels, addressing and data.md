@@ -144,7 +144,10 @@ mainCRTStartup proc
 	sar dword ptr [rbx + rcx*4], cl
 	neg qword ptr [rbx]
 	inc dword ptr [rcx + rdx*4]
-	dec rax
+	dec byte ptr [rax]
+	movsx eax, byte ptr [rcx + 3]
+	movsxd rax, dword ptr [rcx + rdx]		; convert signed 32 bit to 64 bit
+	movzx eax, word ptr [rbx + r8*2 + 4]
 mainCRTStartup endp
 
 
@@ -166,7 +169,6 @@ div32 struct
 	quotient dd ?
 	remainder dd ?
 div32 ends
-
 
 
 .data
