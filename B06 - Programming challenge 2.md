@@ -4,7 +4,7 @@ Create a function takes in the number and address to where to store the result.<
 
 ### Hint
 - Division instructions, DIV and IDIV, gives the remainder of division in 'D' register. <br>
-- Use stack for temporary arbitrary buffer size (Remember that the stack grows into lower addresses).
+- Use stack for temporary buffer of arbitrary size (Remember that the stack grows into lower addresses).
 
 Some instructions you can use:
 ```asm
