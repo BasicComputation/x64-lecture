@@ -20,7 +20,7 @@ Numbers that you consider not signed, are called unsigned.
 
 ### Binary subtraction
 When you subtract, you have to borrow from a upper bit, and set the other bits: <br>
-**01000000 - 00000001 = 00111111** (64 - 1 = 63)  <br>
+**01000000 - 00000100 = 00111100** (64 - 4 = 60)  <br>
 
 If you subtract and cannot borrow from a bit, the computer borrow from outside its range. <br>
 When this happens in a computer, the carry flag is set. So the carry flag can also be considered a borrow flag <br>
@@ -32,7 +32,7 @@ Adding 1 to 7 will result in -8, which is a overflow. <br>
 Subtracting -8 with 1 will result in 7, which is a overflow.
 
 In the flag register, there is flag called the overflow flag (OF), which is set when a addition or subtraction results in a overflow. <br>
-So if you consider the numbers to be signed, this flag tells whether the result did'nt make sense.
+So if you consider the numbers to be signed, this flag tells whether the result did not make sense.
 
 ### Addition examples
 ```
