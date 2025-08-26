@@ -1,7 +1,7 @@
 # Bits, data sizes and number representation
 A bit hold the value 0 or 1, that is voltage off or on in a wire or memory cell. <br>
 A 64 bit computer operates with up to 64 bit in parallel. <br>
-The CPU work mainly with these sizes: <br>
+A 64 bit CPU work mainly with these sizes: <br>
 ```
 8 bit - byte
 16 bit - word
@@ -29,7 +29,7 @@ The binary number 1100 is equal to 8 + 4 = 12
 
 Hexadecimal numbers are numbers with base 16 - 2A3F1007 <br>
 The value 10 is represented by the letter 'A', 11=B 12=C 13=D 14=E 15=F <br>
-Hexadecimal numbers are convinient in programming as 4 bits can hold the values 0 to 15, so <br>
+Hexadecimal numbers are convinient in programming as 4 bits can hold the values 0 to 15. <br>
 8 bits can be split in two and be represented by two hex numbers, 16 bits by 4, 32 bits by 8, 64 bits by 16. <br>
 The individual bits can be read out from a hex number. <br>
 ```
@@ -41,7 +41,7 @@ If you open up the windows calculator, you can in the menu choose 'Programmer'. 
 There you select to write in numbers in decimal, hexadecimal, binary and octal (base 8) <br>
 and see the numbers represented in the differnt forms. <br>
 You can choose the size as well, qword, dword, word, byte. <br>
-Note that numbers are considered signed, can be negative. More on signed numbers later.
+Note that numbers are considered signed (can be negative). More on signed numbers later.
 
 
 **Study the table below**
