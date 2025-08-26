@@ -14,8 +14,8 @@ in the table to read the address from, and then execute from that address.
 mov eax, 10
 syscall
 ```
-When an application do something illegal, like trying to access memory that is not available, a fault occurs, and control is passed over to the kernel of the operating system.
-Special registers hold the entry addresses to execute from for each particular fault. <br>
-When a fault occures the application is terminated, unless it has provided error handling routines.
+When an application do something illegal, like trying to access memory that is not available, a excception occurs, and control is passed over to the kernel of the operating system.
+Special registers hold the entry addresses to execute from for each particular exception. <br>
+When a exception occures the application is terminated, unless it has provided error handling routines.
 
 
