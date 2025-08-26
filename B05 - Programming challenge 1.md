@@ -1,12 +1,15 @@
 # Programming challenge
-convert a string of text containing a number into a 32 bit signed value. <br>
+Convert a string of text containing a number into a 32 bit signed value. <br>
+Create a function that takes in address of text and address where to store the value, <br>
+function should return 1 on success 0 on failure in AL.
+
 Solution are provided in folder "Solutions".
 
 Each character has a value, the numbers 0 to 9 are in sequence: <br>
 0 = 30h 1 = 31h 2 = 32h ... 9 = 39h
 https://cplusplus.com/doc/ascii/
 
-The instructions you can use are:
+Some instructions you can use and hints:
 ```asm
 ; see AMD manual for instruction reference - volume 3 chapter 3
 .code
