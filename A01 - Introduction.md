@@ -41,6 +41,9 @@ mov bx, [1000]    ; read (16 bits) from address IP + 1000, put the value into th
 mov [rcx], dl     ; write 8 bits, that is hold in 'D' register, into memory.
                   ; Address is equal to value in 64 bit part of 'C' register
 
+mov eax, [rsi + rcx*4 - 16]    ; read 32 bits from calculated address rcx + rcx*4 + -16
+mov [rbx + rdx], ax            ; write 16 bits to calculated address rbx + rdx
+
 add eax, ebx      ; eax = eax + ebx (32 bit addition)
                   ; eax = 32 bit part of 'A' register, ebx = 32 bit part of 'B' register
 
