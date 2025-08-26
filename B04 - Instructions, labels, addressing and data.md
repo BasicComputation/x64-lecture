@@ -112,19 +112,17 @@ mainCRTStartup proc
 	add eax, [r8 + 4]		; eax = eax + 32 bit read
 	add [r8 + 8], eax		; 1. read from memory location add the value with eax, then store it back
 	add [someData], 10		; someData is of size word, so add the 16 bit value 10 with
-	add byte ptr [rax], 20	; rax dont show the size of destination, so you have to specify it
+	add byte ptr [rax], 20	; rax dont know the size of destination, so you have to specify it
 	add word ptr [rax], 30
 	add dword ptr [rax], 40
 	add qword ptr [rax], 50
 
 	; SUB
-	sub bl, [r15 + r12]		; bl = bl + 8 bit read
-	sub [rdi + rcx*8], rax	; 1. read from memory location sub the value with eax, then store it back
+	sub bl, [r15 + r12]		; bl = bl - 8 bit read
+	sub [rdi + rcx*8], rax	; read from memory location subtract the value with eax, then store it back
 	sub dword ptr [eax], 100
 
 	; CMP
-	cmp eax, 10
-	cmp rdi, rsi
 	cmp [someData], 1
 	cmp qword ptr [rax], 0
 	cmp al, [rdi]
@@ -187,9 +185,10 @@ div32 ends
 	align 4
 		divA div32 {?,?}	; create "div32" structure named "divA", data members initialized with ?,?
 
+
 .data?
 	align 4
-		divArray div32 8 dup({?,?})		; create array of 8 named "divArray" of data structure "div32" 
+		divArray div32 8 dup({?,?})		; reserve memory for array of 8 "div32" data structures, beginning address is named "divArray"
 
 
 	align 16
