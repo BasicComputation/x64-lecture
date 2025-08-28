@@ -13,10 +13,16 @@ There are several options:
   
   Functions for input/output in the C library uses functions from kernel32.dll.<br>
   Output: puts, putc, printf (printf are not implemented as is any more) <br>
-  Input: gets (need to use gets_s instead), getc, scanf (scanf are not implemented as is any more) <br>
+  Input: gets (need to use gets_s instead), getc, scanf / scanf_s (scanf / scanf_s are not implemented as is any more) <br>
   
   C library functions for input and output are also documented for example here: <br>
   https://cplusplus.com/reference/cstdio/ <br>
+
+**Note:** <br>
+If you want to use functions for formatted data like printf, scanf_s, sprintf_s you have to include:
+- legacy_stdio_definitions.lib
+- ucrt.lib <br>
+
 
 ## Lets first print out some text using the function puts. I explain puts below. <br>
 Further down are some tips for debugging for calling functions.
