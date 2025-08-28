@@ -17,9 +17,18 @@ https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/scanf-s-scanf-
 
 ### sprintf_s
 sprintf_s convert values to text, storing combined result from address provided as string. <br>
+```C++
+int sprintf_s(
+   char *buffer,
+   size_t sizeOfBuffer,
+   const char *format,
+   ...
+);
+```
+First argument is address to buffer, second is size of buffer, third address of the format string, then the values or addresses as arguments. <br>
 https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/sprintf-s-sprintf-s-l-swprintf-s-swprintf-s-l?view=msvc-170
 
-
+### Example
 ```asm
 includelib legacy_stdio_definitions.lib
 includelib ucrt.lib
