@@ -11,7 +11,7 @@ To print a new line you provide the value 10, tab is 9.
 
 ## Example of printing out the 8 bit character set for command prompt using printf
 Printf takes in a string as first argument, that string can contain what is called format specifiers: %s %i %x %llu... <br>
-For each of the format specifiers, printf convert a data type, like 32 bit signed value, float and so on into text, and replaces <br>
+For each of the format specifiers, printf convert the data type, like 32 bit signed value, float and so on into text, and replaces <br>
 its format specifiers in the string provided with the resulting conversion, and prints out to console. <br>
 For each format specifier you provide values or pointers as additional arguments. <br>
 https://cplusplus.com/reference/cstdio/printf/ <br>
