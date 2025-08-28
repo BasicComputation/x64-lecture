@@ -11,7 +11,7 @@ There are several options:
   Windows C library reference: <br>
   https://learn.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-170 <br>
   
-  Functions for input/output in the C library uses functions from kernel32.dll.<br>
+  Functions for input/output in the C library uses functions from ntdll.dll it seems.<br>
   Output: puts, putc, printf (printf are not implemented as is any more) <br>
   Input: gets (need to use gets_s instead), getc, scanf / scanf_s (scanf / scanf_s are not implemented as is any more) <br>
   
