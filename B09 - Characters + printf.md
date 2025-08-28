@@ -66,7 +66,7 @@ mainCRTStartup proc
 	mov dil, 0				; reset counter
 
 @@:	lea rcx, [printf_fmt]	; see string and comment below
-	mov dl, bl				; dl = character value to be presented as 32bit hexadecimal
+	mov dl, bl				; dl = character to be presented as hexadecimal value
 	mov r8b, bl				; r8b = character to be printed out
 	call printf
 
