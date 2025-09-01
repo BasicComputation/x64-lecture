@@ -4,5 +4,6 @@ In these lectures I will give you the necessary knowledge about: <br>
 - Number representation and data sizes
 - CPU operations
 - Memory - RAM and caches
-- and more
+- x64 assembly
+- C++
 
