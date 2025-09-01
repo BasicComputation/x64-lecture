@@ -65,6 +65,6 @@ Conventionally there is a .inc file per .asm file, the name of the .inc file is 
 
 You see IFNDEF "name" (if not defined) and ENDIF (end if), that is ensure that what is between those is only processed once. <br>
 So if name is not defined, define the name with a value, so next time it is included, the name is defined. <br>
-So the .inc file can be included many times, this can be necessary when having a complex setup.
+So the .inc file can be included many times in the same .asm file, this can be necessary when having a complex setup.
 
 
