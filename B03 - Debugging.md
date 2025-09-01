@@ -125,7 +125,6 @@ Also try to divide by 0 and see the message given. While you are at it, try writ
 .code
 
 mainCRTStartup proc
-	lea r8, [numbers]		; get address of "numbers"
 
 	; -- unsigned multiplication --
 	mov eax, 10
