@@ -90,7 +90,11 @@ Carry – CF | Overflow – OF | Sign – SF | Zero – ZF | Auxiliary – AF | 
 **Microsoft name flags like this:**	<br>
 Carry – CY | Overflow – OV | Sign – PL | Zero – ZR | Auxiliary – AC | Parity – PE | Direction – UP
 
-## More debugging
+## More about debugging
+While debugging you can add one or more watch windows, goto menu->Debug->Watch, select one or more, you will find the watch window below. 
+In the watch window you can add registers and name of memory locations to see their value. In example above you have the global variable "product", 
+you either write the name in "Add item to Watch" in watch window, or you can right click on names in source code and select "Add Watch".
+
 While debugging you can also go to menu->Windows->Disassembly <br>
 There you see the disassembled view of memory, so machine instruction presented in assembly form. <br>
 In "Viewing Options":<br>
