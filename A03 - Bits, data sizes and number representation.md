@@ -1,6 +1,4 @@
 # Bits, data sizes and number representation
-A bit hold the value 0 or 1, that is voltage off or on in a wire or memory cell. <br>
-A 64 bit computer operates with up to 64 bit in parallel. <br>
 A 64 bit CPU work mainly with these sizes: <br>
 ```
 8 bit - byte
