@@ -60,16 +60,16 @@ sar al, cl        ; al will be 11111000 (-8), so -128/(2*2*2*2)
 TEST instruction performes a AND operation without storing the result, setting zero and sign flag. <br>
 ```asm
 test al, 0Fh      ; are 4 first bits 0 in al? if yes zero flag is set to 1, else 0.
-jz not_aligned
+jz aligned
 
 test rax, rax    ; if rax is 0, the zero flag is set to 1. If rax is negative, the sign flag is set to 1.
 ```
 
 Bit test instructions: <br>
-- BT reg/mem, n - Bit Test: test bit nr 'n', set the carry flag equal to the value in bit.
-- BTR reg/mem, n - Bit Test and Reset: test bit nr 'n', set carry flag equal to bit value, and clear the bit nr 'n' to 0.
-- BTS reg/mem, n - Bit Test and Set: test bit nr 'n', set carry flag equal to bit value, and set the bit nr 'n' to 1.
-- BTC reg/mem, n - Bit Test and Complement: test bit nr 'n', set carry flag equal to bit value, and complement bit nr 'n'.
+- BT reg/mem, n - Bit Test - test bit nr 'n', set the carry flag equal to the value in bit.
+- BTR reg/mem, n - Bit Test and Reset - test bit nr 'n', set carry flag equal to bit value, and clear the bit nr 'n' to 0.
+- BTS reg/mem, n - Bit Test and Set - test bit nr 'n', set carry flag equal to bit value, and set the bit nr 'n' to 1.
+- BTC reg/mem, n - Bit Test and Complement (invert) - test bit nr 'n', set carry flag equal to bit value, and complement bit nr 'n'.
 
 You also have rotate instructions:<br>
 ROL, ROR, RCL, RCR
