@@ -17,7 +17,7 @@ The instructions are documented in the AMD manual volume 3, chapter 3
 | Arithmetic | ADD SUB , DIV IDIV , MUL IMUL , INC DEC , ADC SBB , NEG |
 | Compare and test | CMP TEST |
 | Jumps | JMP Jcc |
-| Procedure and stack | CALL RET , ENTER LEAVE , POP PUSH |
+| Procedure and stack | CALL RET , POP PUSH |
 | Convert size | MOVSX MOVSXD MOVZX , CBE CWDE CDQE , CWD CDQ CQO |
 | Bit manipulation | AND NOT OR XOR , BT BTC BTR BTS |
 | Shift	| SAL/SHL SAR , SHL SHR , RCL RCR , ROL ROR |
@@ -123,7 +123,7 @@ mainCRTStartup proc
 	sub dword ptr [eax], 100
 
 	; CMP
-	cmp [someData], 1
+	cmp [someData], 1		; 16 bit comparison as someData point to word sized data
 	cmp qword ptr [rax], 0
 	cmp al, [rdi]
 	cmp [rsi + 2], bx
@@ -143,9 +143,9 @@ mainCRTStartup proc
 	neg qword ptr [rbx]
 	inc dword ptr [rcx + rdx*4]
 	dec byte ptr [rax]
-	movsx eax, byte ptr [rcx + 3]
-	movsxd rax, dword ptr [rcx + rdx]		; convert signed 32 bit to 64 bit
-	movzx eax, word ptr [rbx + r8*2 + 4]
+	movsx eax, byte ptr [rcx + 3]			; convert sign byte to signed dword (move sign extend)
+	movsxd rax, dword ptr [rcx + rdx]		; convert signed 32 bit to 64 bit (move sign extend double)
+	movzx eax, word ptr [rbx + r8*2 + 4]	; convert unsigned word to unsigned dword (move zero extend)
 mainCRTStartup endp
 
 
@@ -200,8 +200,8 @@ div32 ends
 
 mainCRTStartup proc
 	; accessing data structure
-	mov [divA].quotient, eax
-	mov [divA].remainder, edx
+	mov [divA].quotient, eax			; IP + offset to divA + offset to quotient (0)
+	mov [divA].remainder, edx			; IP + offset to divA + offset to remainder (4)
 	; or this way
 	mov [divA.quotient], eax
 	mov [divA.remainder], edx
