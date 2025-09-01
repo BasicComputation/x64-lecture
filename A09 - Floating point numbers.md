@@ -63,15 +63,17 @@ cvtsi2ss xmm0, eax    ; convert the value in eax to a float, store it in the low
 
 addss xmm0, xmm1      ; xmm0 = xmm0 + xmm1 - add scalar single: add two floats together
 cvtss2si eax, xmm0    ; convert scalar single to scalar integer, rounded to nearest
-cvttss2si eax, xmm15  ; convert truncated scalar sigle 2 scalar integer, trunctate the fractions (round down)
+cvttss2si eax, xmm15  ; convert truncated scalar single 2 scalar integer, trunctate the fractions (round down)
 
 addpd xmm2, xmm3      ; add packed double
                       ; 2x double is added with 2x double respectivly
                       ; a0 = a0 + b0 and a1 = a1 + b1
-vaddps ymm0, ymm1, ymm2		; ymm0 = ymm1 + ymm2 - add packed singles. Two sets of 8x floats are added together.
-vaddps xmm0, xmm1, xmm2		; ymm0 = ymm1 + ymm2 - add packed singles. Two sets of 4x floats are added together.
+vaddps ymm0, ymm1, ymm2		; ymm0 = ymm1 + ymm2 - add packed singles (256 bits). Two sets of 8x floats are added together.
+vaddps xmm0, xmm1, xmm2		; ymm0 = ymm1 + ymm2 - add packed singles (128 bits). Two sets of 4x floats are added together.
 ```
 
 ## Documentation
 Instructions for the SSE unit are documented in volume 4 chapter 2 of the AMD manual. <br>
 For introduction and overview over this part of the CPU see volume 1 chapter 4
+
+More on this unit of the processor at later point.
