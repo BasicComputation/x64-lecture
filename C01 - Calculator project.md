@@ -30,3 +30,25 @@ The methods I know of:
 - Shunting yard algorithm
 - Binary tree
 
+### Recursive descent parser
+Here the problem is split into functions: addition, subtraction, multiplication and division... as well as a start function. <br>
+
+You have a shared pointer (global variable) that holds address of where in the expression its currently in, it is updated for each operator, parenthesis or number.
+
+Each operator function takes in the number to the left of its operator as argument, and returns result of operation.
+Each operator function, like addition, will check the next part of expression for operator or end of expression (after a number).
+If the next is an operator and has greater presedence (that operation must be done first),
+call operator function with the number to the left of that operator as argument, which in turn does the same and eventually returns result.
+So then in the case of the addition function add number provided as argument to this function with the return value of function called.
+If end of expression you do the operation with number to the left and right of operator and return result.
+
+Each operator function must check for number or left parenthesis after its operator. If it is a left parenthesis you must call the start function, 
+when that function returns you must check for operator and end of expression as described above.
+
+The start function checks intial condition of an expression:
+- If the expression starts with '-' you have to call subtraction function with value 0 as argument
+- If the expresion starts with '(' you have to call itself
+- If the expression start with a number, you check next part of expression for operator or end of expression. <br>
+  If an operator call operator function with the number as first argument. <br>
+  
+Then return resulting value
