@@ -160,6 +160,7 @@ end
 
 ## Data labeling and data structures
 ```asm
+
 ; (code section is below, the order doesnt matter)
 
 ; define data structure named "div32"
@@ -184,11 +185,13 @@ div32 ends
 
 	align 4
 		divA div32 {?,?}	; create "div32" structure named "divA", data members initialized with ?,?
-
+		divB div32 <1,2>	; alternative way to specify initializer list
+		divC div32 <>		; same as {?,?,...}
 
 .data?
 	align 4
-		divArray div32 8 dup({?,?})		; reserve memory for array of 8 "div32" data structures, beginning address is named "divArray"
+		divArray1 div32 8 dup({?,?})		; reserve memory for an array of 8 "div32" data structures, beginning address is named "divArray"
+		divArray2 div32 4 dup(<>)			; same, but alternative way to initialize structure
 
 
 	align 16
@@ -200,23 +203,26 @@ div32 ends
 
 mainCRTStartup proc
 	; accessing data structure
-	mov [divA].quotient, eax			; IP + offset to divA + offset to quotient (0)
-	mov [divA].remainder, edx			; IP + offset to divA + offset to remainder (4)
+	mov [divA].quotient, eax		; IP + offset to divA + offset to quotient (0)
+	mov [divA].remainder, edx		; IP + offset to divA + offset to remainder (4)
 	; or this way
 	mov [divA.quotient], eax
 	mov [divA.remainder], edx
 
-	; SIZEOF() gives the number of bytes a data type occupies
-	mov [divArray + SIZEOF(div32)*0].quotient, eax
-	mov [divArray + SIZEOF(div32)*1].quotient, eax
+	; SIZEOF gives the number of bytes a data type occupies
+	mov [divArray1 + SIZEOF div32 * 0].quotient, eax
+	mov [divArray1 + SIZEOF div32 * 1].quotient, eax
 
 	; addressing with registers
-	lea rdi, [divArray]
-	mov rcx, sizeof(div32)*4
+	lea rdi, [divArray1]
+	mov rcx, SIZEOF div32   * 4
 
 	mov [rdi + rcx].div32.remainder, eax
 	; or this way
 	mov [rdi + rcx + div32.remainder], eax
+
+	; LENGTHOF gives the number of elements in array
+	mov eax, LENGTHOF divArray2
 
 	ret
 mainCRTStartup endp
