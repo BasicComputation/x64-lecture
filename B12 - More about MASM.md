@@ -2,49 +2,76 @@
 Documentation: <br>
 https://learn.microsoft.com/cpp/assembler/masm/microsoft-macro-assembler-reference?view=msvc-170
 
-**Note:** <br>
-For some strange reason, if you want set a register or variable to a value in hexadecimal, and that value <br>
-start with A,B,C,D,E of F, then you get an error, but adding a 0 infront fixes it.
+You can do many things in MASM. I know a few things. <br>
+Keywords can be in both lower or upper case. <br>
 
-**Multiple sections** <br>
 You can have as many of the same sections as you need within a source code file and between files. <br>
-So you can have a .const, .data and .data? per function for example
+So you can have a .const, .data and .data? per function for example.
 
-You can do many things in MASM. I only know a few things, here is a example. <br>
+## Examples
 
 ```asm
-value = 7
+; Assembly process goes from the top and down,
+; but will look for symbols defined after is if not already found
+
+number = 1						; name = value, give names numerical values with value or expression
+value = -10		 
+value = value + number			; value = 3 + 1
+
+.data
+	IF value GE 10				; GE = greater or equal (assemble this part if if true, then skip the rest)
+		data1 db value SHL 1
+	ELSEIF value EQ 0			; EQ = equal
+		data1 db 0
+	ELSEIF value LT 0			; LT = less than
+		data1 db -value
+	ELSE						; else part is assembled if none of the other gave true
+		data1 db 255
+	ENDIF
+
+
 setting = 1
-
-
-IF value GE 10				; is "value" greater or equal to 10
-	value = value SHL 2	
-ELSEIF value LT 10			; is "value" less than 10
-	value = -1*value
-ENDIF
-
-
 
 .code
 
-mainCRTStartup proc
-	register1 equ eax
-	variable1 equ dword ptr [rsp - 4]
+	mainCRTStartup PROC
 
-	mov register1, value
-	mov variable1, register1
+		IF setting EQ 1
+			mov al, 10
+		ELSEIF setting EQ 2
+			mov al, 100
+		ELSE
+			.err				; .err stops the assembly process and give error message 'forced error'
+		ENDIF
 
+		counter EQU rcx			; 'counter' is replaced with rcx wherever it is used
+		xor counter, counter
+		
+		mov al, reference		; refence is defined below
 
-if setting eq 1			; if setting = 1 add this part
-	add register1, 100
-elseif setting eq 2		; else if setting = 2 add this part
-	add register1, 200
-else					; else stop compilation and give error "forced error"
-	.err
-endif
+		ret
+	mainCRTStartup ENDP
 
-	ret
-mainCRTStartup endp
+	reference = 100
 
 end
 ```
+
+## Macros and more
+Macros are a block of code that can be assembled when its name is used in code, it can take in arguments. <br>
+Arguments provided are considered text, and within the macro all names of arguments are replaced with the text. <br>
+
+**Example:**
+```asm
+createString MACRO name:REQ, text:REQ	; argname:REQ means that argument is required
+	ALIGN 2
+	name dw @SizeStr(text) - 2			; @SizeStr get the length of input text, including quotion marks. Therefor -2.
+		db text,0						; paste in argument text as is in code
+ENDM
+
+.data
+	createString msg1, 'a string'
+```
+
+**Example:**
+
