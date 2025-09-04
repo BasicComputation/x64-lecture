@@ -78,7 +78,7 @@ mainCRTStartup endp
 end
 ```
 
-### Explanation of puts (short for "print out string", I guess): <br>
+### Explanation of puts: <br>
 ```C++
 int puts ( const char* str )
 ```
