@@ -1,6 +1,6 @@
 # More about MASM
 Documentation: <br>
-https://learn.microsoft.com/sr-cyrl-rs/cpp/assembler/masm/microsoft-macro-assembler-reference?view=msvc-170
+https://learn.microsoft.com/nb-no/cpp/assembler/masm/microsoft-macro-assembler-reference?view=msvc-170
 
 **Note:** <br>
 For some strange reason, if you want set a register or variable to a value in hexadecimal, and that value <br>
