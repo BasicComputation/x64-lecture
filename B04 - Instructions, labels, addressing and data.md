@@ -1,6 +1,10 @@
 # Instructions, labels, addressing and data
 In order to learn you have to test things. <br>
 
+**Note:** <br>
+For some strange reason, if you want set a register or variable to a value in hexadecimal, and that value <br>
+start with A,B,C,D,E of F, then you get an error, but adding a 0 infront fixes it.
+
 Content
 1. list of instructions you should know in the end
 2. how to label memory to instructions
