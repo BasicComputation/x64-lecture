@@ -8,7 +8,7 @@ start with A,B,C,D,E of F, then you get an error, but adding a 0 infront fixes i
 
 **Multiple sections** <br>
 You can have as many of the same sections as you need within a source code file and between files. <br>
-So you can organize a .cont, .data and .data? per function for example
+So you can have a .const, .data and .data? per function for example
 
 You can do many things in MASM. I only know a few things, here is a example. <br>
 
