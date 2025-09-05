@@ -2,7 +2,7 @@
 In order to learn you have to test things. <br>
 
 **Note:** <br>
-For some strange reason, if you want set a register or variable to a value in hexadecimal, and that value <br>
+If you want set a register or variable to a value in hexadecimal, and that value <br>
 start with A,B,C,D,E of F, then you get an error, but adding a 0 infront fixes it.
 
 Content
@@ -73,7 +73,10 @@ end
 
 ## Addressing memory
 There are many options for addressing. <br>
-Some instructions are more restricted, so you have to refer to the manual some times.
+Some instructions are more restricted, so you have to refer to the manual some times. <br>
+**Note**: <br>
+Immediate values are maximum signed 32 bits, they are signed extended into 64 bits when used with a 64 bit register or memory location, <br>
+exception is mov allows a 64 bit immediate value into register.
 ```asm
 .code
 
@@ -115,7 +118,7 @@ mainCRTStartup proc
 	; ADD
 	add eax, [r8 + 4]		; eax = eax + 32 bit read
 	add [r8 + 8], eax		; 1. read from memory location add the value with eax, then store it back
-	add [someData], 10		; someData is of size word, so add the 16 bit value 10 with
+	add [someData], 10		; someData is of size word, so add the 16 bit value with 10
 	add byte ptr [rax], 20	; rax dont know the size of destination, so you have to specify it
 	add word ptr [rax], 30
 	add dword ptr [rax], 40
@@ -123,12 +126,12 @@ mainCRTStartup proc
 
 	; SUB
 	sub bl, [r15 + r12]		; bl = bl - 8 bit read
-	sub [rdi + rcx*8], rax	; read from memory location subtract the value with eax, then store it back
-	sub dword ptr [eax], 100
+	sub [rdi + rcx*8], rax	; read from memory location subtract the value with rax, then store it back
+	sub dword ptr [rax], 100
 
 	; CMP
 	cmp [someData], 1		; 16 bit comparison as someData point to word sized data
-	cmp qword ptr [rax], 0
+	cmp qword ptr [rax], 0	; 64 bit comparison, note that the immediate is 32 bit, signed extended into 64 bits
 	cmp al, [rdi]
 	cmp [rsi + 2], bx
 	
