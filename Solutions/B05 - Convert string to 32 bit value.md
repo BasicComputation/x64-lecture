@@ -2,38 +2,30 @@
 Function cvt_str2int convert a number in a string to 32 bit signed value. <br>
 Function return 1 when succesful, storing result at provided address.
 
-Basic algorithm: <br>
-1. variable result = 0
-2. check first character for '-', set flag accordingly
-3. is first character 0 ? - goto 11
-4. get character, convert, check. if 0 goto 10 else if not 0-9 goto 11
-5. result = result * 10
-6. overflow? goto 11
-7. result = result + value
-8. overflow? goto 11
-9. goto step 4
-10. check flag, negate if negative. return result
-11. return error
+Invalid numbers:
+- starts with nothing
+- starts with '-' then nothing or then '0'
+- Should you allow a number that starts with 0's?
 
 You can modify this function to take in the length of number from position in text. <br>
 That makes it more useful.
 
 ```asm
 .data
-str1 db '-92683',0
+str1 db '-100',0
 
 .code
 
 mainCRTStartup proc
-	sub rsp, 18h
+	sub rsp, 8
 
-	lea rcx, [str1]
-	lea rdx, [rsp]
+	lea rcx, [str1]			; address of string
+	lea rdx, [rsp]			; address for storing the result
 	call cvt_str2int
 	cmp al, 1
-	cmove eax, [rsp]
+	cmove eax, [rsp]		; mov result into eax if succesful
 
-	add rsp, 18h
+	add rsp, 8
 	ret
 mainCRTStartup endp
 
@@ -45,18 +37,27 @@ cvt_str2int proc
 
 	xor ebx, ebx				; ebx = resulting number
 
+	; negative number ?
 	cmp byte ptr [rcx], '-'
 	sete r15b					; r15b = 1 if '-', else 0
 	jne @f
 	inc rcx
 
-@@:	cmp byte ptr [rcx], 0		; check if number part of string begins with value 0
+	; special cases check
+@@:	cmp byte ptr [rcx], 0		; check if number part of string begins with value 0, if so invalid
 	je invalid
 
+	cmp byte ptr [rcx], '0'		; check if number start with '0'
+	jne @f						; if not start converting
+	cmp byte ptr [rcx + 1], 0	; is next a terminating character ?
+	jne invalid					; if not,invalid number
+	jmp check					; go to check
+	
+	; convert algorith
 @@:	movzx eax, byte ptr [rcx]	; mov zero extend 8 bit value to 32 bit value
 	inc rcx
 	cmp al, 0					; end of string ?
-	je valid
+	je check
 	sub al, '0'
 	cmp al, 10
 	jae invalid					; is value 0 to 9 ?
@@ -67,11 +68,15 @@ cvt_str2int proc
 	jo invalid					; too large ?
 	jmp @b
 
-valid:	
-	cmp r15b, 0					; negative ?
-	je @f
-	neg ebx
-@@: mov [rdx], ebx
+	; is number negative ?
+check:	
+	cmp r15b, 1					; negative ?
+	jne @f
+		test ebx, ebx			; set sign and zero flags
+		jz invalid				; -0 is invalid
+		neg ebx
+
+@@: mov [rdx], ebx				; store result
 	mov al, 1
 	ret
 
@@ -79,7 +84,6 @@ invalid:
 	mov al, 0
 	ret
 cvt_str2int endp
-
 
 end
 ```
