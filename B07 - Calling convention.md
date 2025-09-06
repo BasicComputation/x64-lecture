@@ -1,4 +1,5 @@
 # Calling convention
+**Remember:** The stack pointer should be aligned by 16 when calling another function, this is because many packed floating point instructions require address to be aligned by 16.
 
 ## Stack frame
 A function that calls other functions sets up a stack frame, you can say a stack frame is memory in the stack belonging to a function.<br> 
@@ -71,7 +72,4 @@ RBX, RBP, RDI, RSI, R12-R15, and XMM6-XMM15
 
 If you create a function or a DLL to be used by others, you must return with the values in these registers unchanged.
 
-
-
-
-
+Return value from function is found in 'A' or xmm0 register.
