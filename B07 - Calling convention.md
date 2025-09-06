@@ -3,10 +3,10 @@
 ## Stack frame
 A function that calls other functions sets up a stack frame, you can say a stack frame is memory in the stack belonging to a function.<br> 
 It contain first the return address, and then it is up to function to:
-1. save basepointer if used. Typically done by instruction PUSH RBP. <br>
+1. save basepointer in stack if used. Typically done by instruction PUSH RBP. <br>
    This will also align the stack pointer by 16.
 3. Reserve room for local variables (storage for data) by subtracting the stack pointer. <br>
-4. Only 4 registers are used to pass arguments to a function, for more arguments reserve room for additional arguments by subtracting the stack pointer.
+4. Only 4 registers are used to pass arguments to a function in Windows, for more arguments reserve room for additional arguments by subtracting the stack pointer.
 	In Windows the convention is that each argument takes up 8 bytes, even if it is only a byte. <br>	
 6. In Windows you also subtract the stack pointer by 20h for "shadow space", this is where a called function <br>
   can save arguments passed via registers. So 20h is 4*8 bytes, so 4 register argument can be saved if needed. <br>
