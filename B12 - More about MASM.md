@@ -100,13 +100,13 @@ TokenData UNION 8
 TokenData ENDS
 
 Token STRUCT 8
-	data TokenData <>	; union
+	data TokenData <>	; union member
 	kind db ?
 Token ENDS
 
 .data?
 align 8
-	number Token <<-123.123>, 1>
+	number Token 64 dup (<>)
 
 .code
 
