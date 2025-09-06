@@ -40,15 +40,15 @@ cvt_int2str proc
 	mov byte ptr [rcx], '-'
 	inc rcx
 
-@@:	mov r15d, eax		; save for later, r15 is used for getting the remainder
+@@:	mov r15d, eax		; copy for later use, r15 is used for getting the remainder
 
 	; divide 32 bits with 10, result is in edx
-	imul r11d
-	sar edx,2 
+	imul r11d			; edx:eax = eax * r11d
+	sar edx,2 			; shift arithmetic right: edx = eax / 10
 
-	mov eax, edx
+	mov eax, edx		; save result for further division by 10
 
-	; get remainder
+	; get remainder 
 	imul edx, 10
 	sub r15d, edx
 
@@ -58,16 +58,16 @@ cvt_int2str proc
 	mov [rsp + r10], r15b		; temp storage
 
 	; end of number ?
-	test eax, eax
+	test eax, eax			; no more to divide by 10 ?
 	jnz @b					; is value 0?
 
 	; save characters in correct order at destination
 @@: mov al, [rsp + r10]
 	mov [rcx], al
 	inc rcx
-	inc r10
+	inc r10					; when index into array in stack is 0, it is finished
 	jnz @b
-	mov byte ptr [rcx], 0
+	mov byte ptr [rcx], 0	; add terminating character
 	ret
 
 cvt_int2str endp
