@@ -1,4 +1,12 @@
-# Organizing code with multiple files in MASM
+# Organizing code in MASM
+
+## Multiple projects per solution
+To add another project to your solution, right click on the solution in solution explorer,
+goto Add->New Project.
+
+In order to select which project is run, right click on project and select "Set as Startup Project".
+
+## Multiple files
 Create a new project, include MASM as part of the build process. <br>
 Add C++ source code file named "main.asm" and another named "procs.asm". <br>
 Add another C++ file and name it "procs.inc", this file will be included in other .asm files. <br>
