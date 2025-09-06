@@ -167,7 +167,6 @@ end
 
 ## Data labeling and data structures
 ```asm
-
 ; (code section is below, the order doesnt matter)
 
 ; define data structure named "div32"
@@ -220,13 +219,18 @@ mainCRTStartup proc
 	mov [divArray1 + SIZEOF div32 * 0].quotient, eax
 	mov [divArray1 + SIZEOF div32 * 1].quotient, eax
 
+	; Alternative way of accessing array, [offset] where offset is number of bytes
+	lea rax, [divArray1 [SIZEOF div32 * 1]]
+	mov eax, [divArray1] [SIZEOF div32 * 2].remainder
+
+
 	; addressing with registers
 	lea rdi, [divArray1]
-	mov rcx, SIZEOF div32   * 4
+	mov rcx, 2
 
-	mov [rdi + rcx].div32.remainder, eax
+	mov [rdi + rcx*8].div32.remainder, eax
 	; or this way
-	mov [rdi + rcx + div32.remainder], eax
+	mov [rdi + rcx*8 + div32.remainder], eax
 
 	; LENGTHOF gives the number of elements in array
 	mov eax, LENGTHOF divArray2
