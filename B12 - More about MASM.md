@@ -2,7 +2,7 @@
 Documentation: <br>
 https://learn.microsoft.com/cpp/assembler/masm/microsoft-macro-assembler-reference?view=msvc-170 <br>
 
-- Keywords can be in both lower or upper case
+- MASM is case insensitive
 - You can have as many of the same sections as you need within a source code file and between files. <br>
 So you can have a .const, .data and .data? per function for example. 
 - You can define data with BYTE, WORD, DWORD, QWORD, instead of db, dw, dd, dq. <br>
