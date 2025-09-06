@@ -84,7 +84,7 @@ int puts ( const char* str )
 ```
 First you see the return type of puts. int = signed 32 bit value. Return values are found in 'A' register, so eax. <br>
 Within parentheses you see the arguments of puts: first the type (const char*) and then the name of the argument (str) <br>
-char* means address of data of size byte. The * signify address while char is the data type at the address. <br>
+char* means address of data of size signed byte. The * signify address while char is the data type at the address. <br>
 const means here that puts will be restricted in writing to the address.
 
 So how does puts know when to stop printing out characters? <br>
@@ -96,7 +96,7 @@ In the documentation: <br>
 - On error, the function returns EOF and sets the error indicator (ferror). <br>
 EOF is a negative value, so eax will have that value. <br>
 "error indicator" is, as I understand it, a variable for the C library that is set to signal a error has occured, <br>
-it resides in a data segment belonging to the DLL.
+it resides in a data segment belonging to the DLL (?)
 
 
 ## Debugging tips
