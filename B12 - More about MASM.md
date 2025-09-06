@@ -61,6 +61,8 @@ end
 An union is a data structure that contains members stored at same address. <br>
 Size of union is the size of largest member, alignement can be provided.
 
+Unfortunatly you cannot select which member to initialize in an union, only the first member is initialized.
+
 ```asm
 U1 UNION 8
 	f64		REAL8	?
