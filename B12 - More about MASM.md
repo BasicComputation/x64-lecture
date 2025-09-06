@@ -74,5 +74,53 @@ ENDM
 	infoString msg1, 'a string'			; invoke the macro, content of macro is inserted with replacements, ready for assembly.
 ```
 
-**Example:**
+**Example:** <br>
+Enumeration of values.
+```asm
+; EXPLANATION OF MACRO ARGUMENTS
+;
+; startvalue := <0>
+;		default value is provided after := (if not a number provide without <>)
+;
+; items:VARARG
+;		VARARG means that you can provide as many arguments as you wish
 
+enum MACRO name, startvalue:=<0>, items:VARARG
+
+	; LOCAL makes variable local to macro (not accessible on the outside)
+	LOCAL count
+
+	count = startvalue	
+
+	; FOR loops through for each argument provided within <>
+	; here 'item' will be set to be equal to each argument iterated
+	FOR item, <items>
+
+		; @CatStr(A,B) combines text, so A,B will be AB
+		@CatStr( @CatStr(name, @), item ) = count
+
+		count = count + 1
+
+	ENDM
+
+ENDM
+
+; \ is to ignore newline
+enum type, ,\ 
+		endof, number, operator
+enum operator, 10,\
+		plus, minus, multiply, divide,\
+		exponent, log, log10, sinus, cosinus, tangens, \
+		leftParenthesis, rightParenthesis
+
+.code
+
+mainCRTStartup PROC
+	cmp al, type@operator
+	cmp al, operator@plus
+	cmp al, operator@minus
+	ret
+mainCRTStartup ENDP
+
+end
+```
