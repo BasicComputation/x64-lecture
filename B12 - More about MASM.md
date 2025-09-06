@@ -70,6 +70,7 @@ U1 ENDS
 
 
 .data
+align SIZEOF U1.f64		; align data by size of member of U1
 	number U1 <?>
 
 .code
