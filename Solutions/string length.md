@@ -2,6 +2,7 @@
 Problem: find first occurance of value 0 of size byte, return length up to the 0.
 
 There are several ways of doing this, I provide 5 potensial solutions here. <br>
+Some are good for long strings, other for shorter strings.
 
 C library has a string length function: <br>
 https://cplusplus.com/reference/cstring/strlen/
