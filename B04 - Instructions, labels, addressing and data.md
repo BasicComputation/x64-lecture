@@ -170,7 +170,7 @@ end
 ; (code section is below, the order doesnt matter)
 
 ; define data structure named "div32"
-div32 struct 4			; number 4 means that structure shall be aligned by 4
+div32 struct 4			; number 4 means that structure will aligne next data by 4
 	quotient dd ?
 	remainder dd ?
 div32 ends
