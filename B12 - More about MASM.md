@@ -8,7 +8,7 @@ So you can have a .const, .data and .data? per function for example.
 - You can define data with BYTE, WORD, DWORD, QWORD, instead of db, dw, dd, dq. <br>
 You also have REAL4 and REAL8 for 32 bit and 64 bit floating point data, XMMWORD and YMMWORD are packed
 
-## Examples
+## Some examples
 
 ```asm
 ; Assembly process goes from the top and down,
@@ -54,6 +54,74 @@ setting = 1
 	mainCRTStartup ENDP
 
 	reference = 100
+
+end
+```
+## Union
+An union is a data structure that contains members stored at same address. <br>
+Size of union is the size of largest member, alignement can be provided.
+
+```asm
+U1 UNION 8
+	f64		REAL8	?
+	s64		dq		?
+	s8		db		?
+U1 ENDS
+
+
+.data
+	number U1 <?>
+
+.code
+
+	mainCRTStartup proc
+		mov al, [number.s8]
+		movq xmm0, [number.f64]
+		ret
+	mainCRTStartup endp
+
+end
+```
+## Structures with structures
+```asm
+operator@plus = 1
+operator@minus = 2
+operator@multiply = 3 
+operator@divide = 4
+
+kind@endof = 0
+kind@number = 1
+kind@operator = 2
+
+TokenData UNION 8
+	number	REAL8	?
+	operator db ?
+TokenData ENDS
+
+Token STRUCT 8
+	data TokenData <>	; union
+	kind db ?
+Token ENDS
+
+.data?
+align 8
+	number Token <<-123.123>, 1>
+
+.code
+
+	mainCRTStartup proc
+		
+		mov al, [number.kind + SIZEOF Token * 3]
+
+		; access operator member of union TokenData in Token structure
+		mov al, [number.data.operator + SIZEOF Token * 3]
+		
+		; store values in Token structure
+		movq [number.data.number + SIZEOF Token * 2], xmm0
+		mov [number.kind + SIZEOF Token * 2], kind@number
+	
+		ret
+	mainCRTStartup endp
 
 end
 ```
