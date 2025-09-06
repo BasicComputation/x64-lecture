@@ -12,7 +12,7 @@ That makes it more useful.
 
 ```asm
 .data
-str1 db '-100',0
+str1 db '0',0
 
 .code
 
@@ -44,19 +44,18 @@ cvt_str2int proc
 	inc rcx
 
 	; special cases check
-@@:	cmp byte ptr [rcx], 0		; check if number part of string begins with value 0, if so invalid
+@@:	movzx eax, byte ptr [rcx]	; move zero extend
+	cmp al, 0					; check if number part of string begins with value 0, if so invalid
 	je invalid
 
-	cmp byte ptr [rcx], '0'		; check if number start with '0'
+	cmp al, '0'					; check if number start with '0'
 	jne @f						; if not start converting
 	cmp byte ptr [rcx + 1], 0	; is next a terminating character ?
 	jne invalid					; if not,invalid number
 	jmp check					; go to check
 	
 	; convert algorith
-@@:	movzx eax, byte ptr [rcx]	; mov zero extend 8 bit value to 32 bit value
-	inc rcx
-	cmp al, 0					; end of string ?
+@@:	cmp al, 0					; end of string ?
 	je check
 	sub al, '0'
 	cmp al, 10
@@ -66,6 +65,9 @@ cvt_str2int proc
 	jo invalid					; too large ?
 	add ebx, eax				; result = result + value
 	jo invalid					; too large ?
+	
+	inc rcx
+	movzx eax, byte ptr [rcx]	; mov zero extend 8 bit value to 32 bit value
 	jmp @b
 
 	; is number negative ?
@@ -84,6 +86,7 @@ invalid:
 	mov al, 0
 	ret
 cvt_str2int endp
+
 
 end
 ```
