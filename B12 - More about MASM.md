@@ -64,7 +64,7 @@ Size of union is the size of largest member, alignement can be provided.
 Unfortunatly you cannot select which member to initialize in an union, only the first member is initialized.
 
 ```asm
-U1 UNION 8
+U1 UNION 8				; align data after structure by 8
 	f64		REAL8	?
 	s64		dq		?
 	s8		db		?
