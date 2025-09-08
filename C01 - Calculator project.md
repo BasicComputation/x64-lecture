@@ -41,9 +41,9 @@ Each operator function takes in the number to the left of its operator as argume
 Each operator function, like addition, will check the next part of expression for left parenthesis or number.
 If left parenthesis call the main function, as if it is a new expression, if a number check next for operator, right parenthesis or end of expression.
 
-If the next part is an operator and has greater presedence (that operation must be done first), call operator function with the number to the left of that operator as argument,
+If the next part is an operator and has greater precedence (that operation must be done first), call operator function with the number to the left of that operator as argument,
 which in turn does the same and eventually returns result, ready for the operation with the two number and to be returned.
-If the next part is an operator with equal or lesser presedence, is a rigth parenthesis, is end of expression, do the operation with number to the left and right of operator and return result.
+If the next part is an operator with equal or lesser precedence, is a rigth parenthesis, is end of expression, do the operation with number to the left and right of operator and return result.
 
 The start function checks intial condition of an expression:
 - If the expression starts with '-', and the next part of expression is a number you have to subtract zero with that number, if the next part is left parenthesis you have to subtract zero with return value of expression.
@@ -71,10 +71,14 @@ So push numbers onto stack, and check operators with top of operator stack, do c
 If a left parenthis is encountered, you push it on the operator stack, and continue as if it is a new expression. <br>
 When a right parenthesis is encountered, it means that all operations waiting on the stack until left parenthesis must be done. After that pop left parenthesis.
 
+It is good to give each operators on the operator stack values according to their precedence, so then it easier to compare. <br>
+Left and right parenthesis has to have lower precedence than the others. <br>
+Also if you allow SIN, COS, SQR and so on, you have to give operators a value.
+
 **Procedure** <br>
 When you read from the start of an expression, you first have to check for '-', '(', and the procede.
 - Initial condition
-1. If a minus you push it onto operator stack and the number 0 onto number stack so you have "0 - "
+1. If a minus you push a unary minus (has greater precedence than exponent (?)) onto operator stack and the number 0 onto number stack so you have "0 unary - "
 2. If a left parenthesis you push it onto the stack for operators and goto beginning as if a new expression begins.
 - Main body
 1. Get number, push it onto stack, if not a number its a error.
@@ -95,9 +99,18 @@ expression: 1 + 2 * 3 + 4
 1   1 +    1 +    1 +   1 +   1 +   7    7 +    7 +    11
 
 Reads:
-1    +     2      *     3     +                 4     end of (0)
+1    +     2      *     3     +                 4      end of (0)
 ```
+```
+expression: (1 + 2) * 3
 
+
+                +    2 +                         3
+  (    1 (    1 (    1 (    3 (    3     3 *     3 *      9
+
+Reads:
+(      1      +      2      )            *       3        end of
+```
 
 
 
