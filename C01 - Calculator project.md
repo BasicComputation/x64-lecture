@@ -79,12 +79,12 @@ Also if you allow SIN, COS, SQR and so on, you have to give operators a value.
 When you read from the start of an expression, you first have to check for '-', '(', and the procede.
 - Initial condition
 1. If a minus you push a unary minus (has greater precedence than exponent (?)) onto operator stack and the number 0 onto number stack so you have "0 unary - "
-2. If a left parenthesis you push it onto the stack for operators and goto beginning as if a new expression begins.
 - Main body
-1. Get number, push it onto stack, if not a number its a error.
-2. Check for operator, ')', end of expression. <br>
+1. If a left parenthesis you push it onto the stack for operators and goto beginning as if a new expression begins.
+2. Get number, push it onto stack, if not a number its a error. <br>
+  Check for operator, ')', end of expression. <br>
   If operator: Check precedence and do calculation(s), push operator onto stack. Next must be a number or '(', <br>
-  If ')': Do calculations until '(' is found, if not found the expression is invalid. <br>
+  If ')': Do calculations until '(' is found in stack, if not found the expression is invalid. <br>
   If end of expression: Do calculations until operator stack is empty. Return result.
    
 Along the way you have to check if content of expression is valid, and if the expression follow the rules.
