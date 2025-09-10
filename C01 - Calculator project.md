@@ -26,33 +26,9 @@ Divide the program into 3 parts: input, calculator, output.
 
 ## Methods
 The methods I know of:
-- Recursive descent parser
 - Shunting yard algorithm
+- Recursive descent parser
 - Binary tree
-
-##
-### Recursive descent parser
-Here the problem is split into functions: addition, subtraction, multiplication and division... as well as a start function. <br>
-
-You have a shared pointer (global variable) that holds address of where in the expression its currently in, it is updated with the length of each operator, parenthesis or number.
-
-Each operator function takes in the number to the left of its operator as argument, and returns result of operation with the number to the right or return value from operation or expression.
-
-Each operator function, like addition, will check the next part of expression for left parenthesis or number.
-If left parenthesis call the main function, as if it is a new expression, if a number check next for operator, right parenthesis or end of expression.
-
-If the next part is an operator and has greater precedence (that operation must be done first), call operator function with the number to the left of that operator as argument,
-which in turn does the same and eventually returns result, ready for the operation with the two number and to be returned.
-If the next part is an operator with equal or lesser precedence, is a rigth parenthesis, is end of expression, do the operation with number to the left and right of operator and return result.
-
-The start function checks intial condition of an expression:
-- If the expression starts with '-', and the next part of expression is a number you have to subtract zero with that number, if the next part is left parenthesis you have to subtract zero with return value of expression.
-- If the expresion starts with '(' it have to call itself. After function returns check for ')', then the next must be an operator, ')' or end of expression.
-- If the expression start with a number, you check next part of expression for operator, ')' or end of expression. If operator call operator function with number as argument.
-- After an operator function returns to start function you must check for operator, ')' or end of expression. So this means to go back.
-When end of expression return resulting value.
-
-Along the way you have to check if content of expression is valid, and if the expression follow the rules.
 
 ##
 ### Shunting yard algorithm
@@ -76,16 +52,18 @@ Left and right parenthesis has to have lower precedence than the others. <br>
 Also if you allow SIN, COS, SQR and so on, you have to give operators a value.
 
 **Procedure** <br>
-When you read from the start of an expression, you first have to check for '-', '(', and the procede.
-- Initial condition
-1. If a minus you push a unary minus (has greater precedence than exponent (?)) onto operator stack and the number 0 onto number stack so you have "0 unary - "
-- Main body
-1. If a left parenthesis you push it onto the stack for operators and goto beginning as if a new expression begins.
-2. Get number, push it onto stack, if not a number its a error. <br>
-  Check for operator, ')', end of expression. <br>
-  If operator: Check precedence and do calculation(s), push operator onto stack. Next must be a number or '(', <br>
-  If ')': Do calculations until '(' is found in stack, if not found the expression is invalid. <br>
-  If end of expression: Do calculations until operator stack is empty. Return result.
+
+1. Main loop : <br>
+  If a minus you push a unary minus (has greater precedence than exponent (?)) onto operator stack and the number 0 onto number stack so you have "0 unary - "
+2. sub loop 1: <br>
+  Must be '(' or number. <br>
+  If '(' push on the operator stack then goto 1. <br>
+  If number, push on number stack and continue to 3.
+3. sub loop 2: <br>
+  Must be ), +, -, * , /, ... , end of expression. <br>
+  If ')' do calculations until a '(' occures on the operator stack. Go back to 3. when done. <br>
+  If +,-,*,/ ... then calculate and push operator. When finish goto 2. <br>
+  If end of expression, then calculate until operator stack is empty  
    
 Along the way you have to check if content of expression is valid, and if the expression follow the rules.
 
@@ -111,6 +89,30 @@ expression: (1 + 2) * 3
 Reads:
 (      1      +      2      )            *       3        end of
 ```
+
+##
+### Recursive descent parser
+Here the problem is split into functions: addition, subtraction, multiplication and division... as well as a start function. <br>
+
+You have a shared pointer (global variable) that holds address of where in the expression its currently in, it is updated with the length of each operator, parenthesis or number.
+
+Each operator function takes in the number to the left of its operator as argument, and returns result of operation with the number to the right or return value from operation or expression.
+
+Each operator function, like addition, will check the next part of expression for left parenthesis or number.
+If left parenthesis call the main function, as if it is a new expression, if a number check next for operator, right parenthesis or end of expression.
+
+If the next part is an operator and has greater precedence (that operation must be done first), call operator function with the number to the left of that operator as argument,
+which in turn does the same and eventually returns result, ready for the operation with the two number and to be returned.
+If the next part is an operator with equal or lesser precedence, is a rigth parenthesis, is end of expression, do the operation with number to the left and right of operator and return result.
+
+The start function checks intial condition of an expression:
+- If the expression starts with '-', and the next part of expression is a number you have to subtract zero with that number, if the next part is left parenthesis you have to subtract zero with return value of expression.
+- If the expresion starts with '(' it have to call itself. After function returns check for ')', then the next must be an operator, ')' or end of expression.
+- If the expression start with a number, you check next part of expression for operator, ')' or end of expression. If operator call operator function with number as argument.
+- After an operator function returns to start function you must check for operator, ')' or end of expression. So this means to go back.
+When end of expression return resulting value.
+
+Along the way you have to check if content of expression is valid, and if the expression follow the rules.
 
 
 
