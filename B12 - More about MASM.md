@@ -2,7 +2,7 @@
 Documentation: <br>
 https://learn.microsoft.com/cpp/assembler/masm/microsoft-macro-assembler-reference?view=msvc-170 <br>
 
-- MASM is case insensitive
+- MASM keywords are case insensitive
 - You can have as many of the same sections as you need within a source code file and between files. <br>
 So you can have a .const, .data and .data? per function for example. 
 - You can define data with BYTE, WORD, DWORD, QWORD, instead of db, dw, dd, dq. <br>
@@ -108,20 +108,20 @@ Token ENDS
 
 .data?
 align 8
-	number Token 64 dup (<>)
+	tokens Token 64 dup (<>)
 
 .code
 
 	mainCRTStartup proc
 		
-		mov al, [number.kind + SIZEOF Token * 3]
+		mov al, [tokens.kind + SIZEOF Token * 3]
 
 		; access operator member of union TokenData in Token structure
-		mov al, [number.data.operator + SIZEOF Token * 3]
+		mov al, [tokens.data.operator + SIZEOF Token * 3]
 		
 		; store values in Token structure
-		movq [number.data.number + SIZEOF Token * 2], xmm0
-		mov [number.kind + SIZEOF Token * 2], kind@number
+		movq [tokens.data.number + SIZEOF Token * 2], xmm0
+		mov [tokens.kind + SIZEOF Token * 2], kind@number
 	
 		ret
 	mainCRTStartup endp
@@ -136,13 +136,12 @@ Arguments provided are considered text, and within the macro all names of argume
 **Example:**
 ```asm
 infoString MACRO name:REQ, text:REQ		; :REQ means that argument is required
-	ALIGN 2
 	name dw @SizeStr(text) - 2			; @SizeStr get the length of argument text, including quotion marks, therefore -2.
-		db text							; paste in argument text as is in code
+		db text, 0						; paste in argument text as is in code
 ENDM
 
 .data
-	infoString msg1, 'a string'			; invoke the macro, content of macro is inserted with replacements, ready for assembly.
+	infoString msg1, 'a string', 0		; invoke the macro, content of macro is inserted with replacements, ready for assembly.
 ```
 
 **Example:** <br>
