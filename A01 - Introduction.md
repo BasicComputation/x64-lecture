@@ -13,9 +13,6 @@ Those tables contains the steps that the CPU must do to perform a operation.
 
 Basic operations: copy, add, subtract, multiply, divide, compare, jumps, bit operations.
 
-Assembly instructions will be converted into machine instructions. <br>
-C++ is higher level code that will be converted into assembly code. <br>
-
 ## You need
 A computer with 64 bit AMD or Intel CPU, the most common processor types in desktop and laptops.<br>
 Windows and the programming environment Visual Studio from Microsoft. <br>
