@@ -5,6 +5,7 @@ function should return 1 on success 0 on failure in AL.
 
 Solution are provided in folder "Solutions".
 
+(A string is a sequence of characters and is terminated by the value 0)
 Each character has a value, the numbers 0 to 9 are in sequence: <br>
 0 = 30h 1 = 31h 2 = 32h ... 9 = 39h
 https://cplusplus.com/doc/ascii/
